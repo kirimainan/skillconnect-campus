@@ -13,6 +13,38 @@ use Carbon\Carbon;
 
 class AuthController extends Controller
 {
+    // 1. FITUR REGISTER (Bikin Akun Baru)
+    public function register(Request $request)
+    {
+        // Validasi input
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6',
+            'role' => 'required|in:mahasiswa,client', // Validasi role
+        ]);
+
+        if ($validator->fails()) {
+            return ApiFormatter::createJson(400, 'Gagal Validasi', $validator->errors());
+        }
+
+        // Simpan User ke Database
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password), // Password wajib di-hash
+            'role' => $request->role,
+        ]);
+
+        // Langsung buatkan token JWT untuk user baru ini
+        $token = JWTAuth::fromUser($user);
+
+        // Return response JSON rapi
+        return ApiFormatter::createJson(201, 'Register Berhasil', [
+            'user' => $user,
+            'token' => $token
+        ]);
+    }
     public function login(Request $request)
     {
         try {
@@ -102,11 +134,52 @@ class AuthController extends Controller
 
         // MENJADI ini:
         $token = JWTAuth::getToken();
-        
-        if($token){
+
+        if ($token) {
             JWTAuth::invalidate($token);
         }
 
         return response()->json(ApiFormatter::createJson(200, 'Successfully logged out'), 200);
+    }
+    // 6. UPDATE PROFILE (Foto & Password)
+    public function updateProfile(Request $request)
+    {
+        $user = auth()->user(); // Ambil user yang sedang login
+
+        // Validasi input
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id, // Email boleh sama kalau punya sendiri
+            'password' => 'nullable|min:6',        // Password opsional (kalau gak mau ganti)
+            'photo' => 'nullable|image|max:2048', // Foto opsional, max 2MB
+            'phone' => 'nullable|string',
+            'skills' => 'nullable|string'
+        ]);
+
+        if ($validator->fails()) {
+            return ApiFormatter::createJson(400, 'Validasi Gagal', $validator->errors());
+        }
+
+        // Logic Upload Foto
+        if ($request->hasFile('photo')) {
+            // Simpan file ke folder: storage/app/public/photos
+            $path = $request->file('photo')->store('photos', 'public');
+            $user->photo = $path; // Simpan path-nya ke database
+        }
+
+        // Update data text
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->skills = $request->skills;
+
+        // Cek apakah user kirim password baru?
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save(); // Simpan perubahan ke DB
+
+        return ApiFormatter::createJson(200, 'Profile Berhasil Diupdate', $user);
     }
 }
