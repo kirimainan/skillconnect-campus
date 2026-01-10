@@ -1,8 +1,729 @@
 {
   "info": {
     "_postman_id": "3c2d9388-2055-4029-89f9-8e51cc273ef8",
-    "name": "New Collection",
+    "name": "UAS-PWS-SKILLCONNECT-CAMPUS",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
-  "item": []
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login",
+          "id": "6214e4b6-e451-4cfa-ab1c-0bfe37373d17",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text",
+                "uuid": "34c6f183-9c7d-486d-912b-47557569ac8d"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "email",
+                  "value": "davin@skillconnect.com",
+                  "type": "text",
+                  "uuid": "9d549f30-fa6e-4892-94a0-1aa8961f0228"
+                },
+                {
+                  "key": "password",
+                  "value": "rahasia123",
+                  "type": "text",
+                  "uuid": "06aa08a3-e668-4f17-9c50-5311059b36bd"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b861f502-3408-4b8b-93ac-5a6521133a4c",
+              "name": "Login Succes",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text",
+                    "uuid": "34c6f183-9c7d-486d-912b-47557569ac8d"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "email",
+                      "value": "davin@skillconnect.com",
+                      "type": "text",
+                      "uuid": "9d549f30-fa6e-4892-94a0-1aa8961f0228"
+                    },
+                    {
+                      "key": "password",
+                      "value": "rahasia123",
+                      "type": "text",
+                      "uuid": "06aa08a3-e668-4f17-9c50-5311059b36bd"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/auth/login",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Host",
+                  "value": "127.0.0.1:8000"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "PHP/8.3.28"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 10 Jan 2026 09:49:05 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "59"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "responseTime": "2026-01-10T09:49:16.277Z",
+              "body": "{\n    \"headers\": {},\n    \"original\": {\n        \"code\": 200,\n        \"message\": \"Login successful\",\n        \"data\": {\n            \"type\": \"Bearer\",\n            \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgwMzg1NDUsImV4cCI6MTc2ODA0MjE0NSwibmJmIjoxNzY4MDM4NTQ1LCJqdGkiOiJWOWdremFiR2JtUHRLTTdQIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.TJfLyCP0vHUY1xyGxGKUFRlQCyfXT1f9XBus4kEf_QU\",\n            \"expires\": \"2026-01-10 10:49:05\"\n        }\n    },\n    \"exception\": null\n}"
+            }
+          ]
+        },
+        {
+          "name": "Register",
+          "id": "4d32393c-b613-4e01-b0aa-2aecfa3e3049",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text",
+                "uuid": "3acbe89c-8046-4f2c-81e3-8408a81f18e7",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Davin",
+                  "type": "text",
+                  "uuid": "c95f14da-179c-4c2f-adb4-ccfdc181543c"
+                },
+                {
+                  "key": "email",
+                  "value": "davinjulhan@skillconnect.com",
+                  "type": "text",
+                  "uuid": "87ebc068-7991-4031-b54e-12e51096fd30"
+                },
+                {
+                  "key": "password",
+                  "value": "rahasia123",
+                  "type": "text",
+                  "uuid": "ef8a5a6b-e949-4470-83d6-2a0d80fda396"
+                },
+                {
+                  "key": "role",
+                  "value": "mahasiswa",
+                  "type": "text",
+                  "uuid": "12a530df-81f0-4a3d-84df-4cc8ea2c80f9"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/auth/register",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "07d6778c-0a5d-4491-b69c-7fcc47a50b1d",
+              "name": "Register Succes",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text",
+                    "uuid": "3acbe89c-8046-4f2c-81e3-8408a81f18e7",
+                    "disabled": true
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "Davin",
+                      "type": "text",
+                      "uuid": "c95f14da-179c-4c2f-adb4-ccfdc181543c"
+                    },
+                    {
+                      "key": "email",
+                      "value": "davinjulhan@skillconnect.com",
+                      "type": "text",
+                      "uuid": "87ebc068-7991-4031-b54e-12e51096fd30"
+                    },
+                    {
+                      "key": "password",
+                      "value": "rahasia123",
+                      "type": "text",
+                      "uuid": "ef8a5a6b-e949-4470-83d6-2a0d80fda396"
+                    },
+                    {
+                      "key": "role",
+                      "value": "mahasiswa",
+                      "type": "text",
+                      "uuid": "12a530df-81f0-4a3d-84df-4cc8ea2c80f9"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/auth/register",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Host",
+                  "value": "127.0.0.1:8000"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "PHP/8.3.28"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 10 Jan 2026 09:41:01 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "58"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "responseTime": "2026-01-10T09:41:32.388Z",
+              "body": "{\n    \"code\": 201,\n    \"message\": \"Register Berhasil\",\n    \"data\": {\n        \"user\": {\n            \"name\": \"Davin\",\n            \"email\": \"davinjulhan@skillconnect.com\",\n            \"role\": \"mahasiswa\",\n            \"updated_at\": \"2026-01-10T09:41:00.000000Z\",\n            \"created_at\": \"2026-01-10T09:41:00.000000Z\",\n            \"id\": 2\n        },\n        \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvcmVnaXN0ZXIiLCJpYXQiOjE3NjgwMzgwNjEsImV4cCI6MTc2ODA0MTY2MSwibmJmIjoxNzY4MDM4MDYxLCJqdGkiOiJZWEtNT2VGQnU4SUhUZ0ZqIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.DldesaiqGzxn1yqPhxOCSYaQ6iwWLcPI2Y6-PDji2B0\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Login Check Succes",
+          "id": "9db10a7d-d0b3-4cb3-9683-5a06aa5b7645",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgwMzg1NDUsImV4cCI6MTc2ODA0MjE0NSwibmJmIjoxNzY4MDM4NTQ1LCJqdGkiOiJWOWdremFiR2JtUHRLTTdQIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.TJfLyCP0vHUY1xyGxGKUFRlQCyfXT1f9XBus4kEf_QU",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text",
+                "uuid": "a6f90f2a-0939-4644-9991-9689742d1310"
+              }
+            ],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/auth/me",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2fa5dd61-7ed7-4925-8725-1aa363f5ca79",
+              "name": "Login CHeck Succes",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text",
+                    "uuid": "a6f90f2a-0939-4644-9991-9689742d1310"
+                  }
+                ],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/auth/me",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "me"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Host",
+                  "value": "127.0.0.1:8000"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "PHP/8.3.28"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 10 Jan 2026 09:50:45 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "59"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "responseTime": "2026-01-10T09:50:58.531Z",
+              "body": "{\n    \"headers\": {},\n    \"original\": {\n        \"code\": 200,\n        \"message\": \"Logged in User\",\n        \"data\": {\n            \"name\": \"Kirimao\",\n            \"email\": \"davin@skillconnect.com\",\n            \"exp\": \"2026-01-10 10:49:05\"\n        }\n    },\n    \"exception\": null\n}"
+            }
+          ]
+        },
+        {
+          "name": "Logout Succes",
+          "id": "a6dfd144-b41b-4fa0-943b-64c3b27e87c6",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgwMzg1NDUsImV4cCI6MTc2ODA0MjE0NSwibmJmIjoxNzY4MDM4NTQ1LCJqdGkiOiJWOWdremFiR2JtUHRLTTdQIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.TJfLyCP0vHUY1xyGxGKUFRlQCyfXT1f9XBus4kEf_QU",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text",
+                "uuid": "78342a74-ec46-4e49-9a8e-ad62c5f89aca"
+              }
+            ],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/auth/logout",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "auth",
+                "logout"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4f75e262-84b3-473c-a3e9-7b0647f42b41",
+              "name": "Logout Succes",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text",
+                    "uuid": "78342a74-ec46-4e49-9a8e-ad62c5f89aca"
+                  }
+                ],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/auth/logout",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "logout"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Host",
+                  "value": "127.0.0.1:8000"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "PHP/8.3.28"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 10 Jan 2026 09:52:18 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "59"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "responseTime": "2026-01-10T09:52:20.544Z",
+              "body": "{\n    \"headers\": {},\n    \"original\": {\n        \"code\": 200,\n        \"message\": \"Successfully logged out\",\n        \"data\": []\n    },\n    \"exception\": null\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Profile",
+          "id": "aeb97cf3-4ec3-4e95-8902-a39acfd310f7",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgwMzk0MzcsImV4cCI6MTc2ODA0MzAzNywibmJmIjoxNzY4MDM5NDM3LCJqdGkiOiJscFdQdDFHaDh6QTQ4Yzg5Iiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.88W3S9LaKe5rk_7bHWIXl6PFcBZdBrZKA9u4gu7BY1k",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text",
+                "uuid": "861a34bd-b543-4706-839d-f3ae79e591bc"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Kirimainan",
+                  "type": "text",
+                  "uuid": "4ab5290e-bf90-4e0e-ac82-74c024aab564"
+                },
+                {
+                  "key": "photo",
+                  "type": "file",
+                  "uuid": "d5322c69-95f9-41b9-bdd1-10113894a924",
+                  "src": [
+                    "/C:/Users/User/Downloads/smartlamp 2 lamp.png"
+                  ]
+                },
+                {
+                  "key": "email",
+                  "value": "davin@skillconnect.com",
+                  "type": "text",
+                  "uuid": "7c2e3559-958e-46be-bb65-6c8e0b30d4ed"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/auth/update-profile",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "auth",
+                "update-profile"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "13dc1614-cdc8-4079-99d7-289d97cbe395",
+              "name": "Update Profile Succes",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text",
+                    "uuid": "861a34bd-b543-4706-839d-f3ae79e591bc"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "Kirimainan",
+                      "type": "text",
+                      "uuid": "4ab5290e-bf90-4e0e-ac82-74c024aab564"
+                    },
+                    {
+                      "key": "photo",
+                      "type": "file",
+                      "uuid": "d5322c69-95f9-41b9-bdd1-10113894a924",
+                      "src": [
+                        "/C:/Users/User/Downloads/smartlamp 2 lamp.png"
+                      ]
+                    },
+                    {
+                      "key": "email",
+                      "value": "davin@skillconnect.com",
+                      "type": "text",
+                      "uuid": "7c2e3559-958e-46be-bb65-6c8e0b30d4ed"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/auth/update-profile",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "update-profile"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Host",
+                  "value": "127.0.0.1:8000"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "PHP/8.3.28"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 10 Jan 2026 10:04:12 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "59"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "responseTime": "2026-01-10T10:04:14.952Z",
+              "body": "{\n    \"code\": 200,\n    \"message\": \"Profile Berhasil Diupdate\",\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Kirimainan\",\n        \"email\": \"davin@skillconnect.com\",\n        \"role\": \"mahasiswa\",\n        \"photo\": \"photos/yWqLaB3UOHZffXFZmCOHBPDPGiPJO1RP80wLlKid.png\",\n        \"skills\": null,\n        \"phone\": null,\n        \"created_at\": \"2026-01-09T15:49:06.000000Z\",\n        \"updated_at\": \"2026-01-10T10:04:12.000000Z\"\n    }\n}"
+            }
+          ]
+        }
+      ],
+      "id": "cd68f85e-13b4-4ceb-b638-396b78e5eeb1"
+    }
+  ]
 }
