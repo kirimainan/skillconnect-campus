@@ -11,18 +11,21 @@ use App\Helpers\ApiFormatter;
 
 class CategoryController extends Controller
 {
-    // 1. GET: Tampilkan Semua Kategori
+    // 1. GET ALL (Bisa diakses siapa saja yang login)
     public function index()
     {
         $categories = Category::all();
-
         return ApiFormatter::createJson(200, 'List Data Kategori', $categories);
     }
 
-    // 2. POST: Tambah Kategori Baru (INI YANG HILANG TADI)
+    // 2. CREATE (HANYA ADMIN)
     public function store(Request $request)
     {
-        // Validasi Input
+        // Validasi Role: Admin Only
+        if (auth()->user()->role !== 'admin') {
+            return ApiFormatter::createJson(403, 'Forbidden: Hanya Admin yang boleh menambah kategori!');
+        }
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|unique:categories,name'
         ]);
@@ -31,7 +34,6 @@ class CategoryController extends Controller
             return ApiFormatter::createJson(400, 'Validasi Gagal', $validator->errors());
         }
 
-        // Simpan Data
         $category = Category::create([
             'name' => $request->name,
             'slug' => Str::slug($request->name)
@@ -40,7 +42,7 @@ class CategoryController extends Controller
         return ApiFormatter::createJson(201, 'Kategori Berhasil Ditambahkan', $category);
     }
 
-    // 3. GET: Detail Kategori
+    // 3. SHOW DETAIL (Bisa diakses siapa saja yang login)
     public function show($id)
     {
         $category = Category::find($id);
@@ -52,9 +54,14 @@ class CategoryController extends Controller
         return ApiFormatter::createJson(200, 'Detail Kategori', $category);
     }
 
-    // 4. PUT: Update Kategori
+    // 4. UPDATE (HANYA ADMIN)
     public function update(Request $request, $id)
     {
+        // Validasi Role: Admin Only
+        if (auth()->user()->role !== 'admin') {
+            return ApiFormatter::createJson(403, 'Forbidden: Hanya Admin yang boleh edit kategori!');
+        }
+
         $category = Category::find($id);
 
         if (!$category) {
@@ -68,7 +75,7 @@ class CategoryController extends Controller
         if ($validator->fails()) {
             return ApiFormatter::createJson(400, 'Validasi Gagal', $validator->errors());
         }
-             
+
         $category->update([
             'name' => $request->name,
             'slug' => Str::slug($request->name)
@@ -77,9 +84,14 @@ class CategoryController extends Controller
         return ApiFormatter::createJson(200, 'Kategori Berhasil Diupdate', $category);
     }
 
-    // 5. DELETE: Hapus Kategori
+    // 5. DELETE (HANYA ADMIN)
     public function destroy($id)
     {
+        // Validasi Role: Admin Only
+        if (auth()->user()->role !== 'admin') {
+            return ApiFormatter::createJson(403, 'Forbidden: Hanya Admin yang boleh hapus kategori!');
+        }
+
         $category = Category::find($id);
 
         if (!$category) {

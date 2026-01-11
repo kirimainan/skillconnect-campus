@@ -10,23 +10,23 @@ use App\Helpers\ApiFormatter;
 
 class ProjectController extends Controller
 {
-    // 1. GET ALL: Tampilkan semua lowongan
+    // 1. GET ALL
     public function index()
     {
+        // Menampilkan data project beserta nama Client dan Kategorinya
         $projects = Project::with(['client:id,name,photo', 'category:id,name'])->get();
 
         return ApiFormatter::createJson(200, 'List Data Project', $projects);
     }
 
-    // 2. CREATE: Tambah Lowongan (INI YANG ERROR TADI)
+    // 2. CREATE (HANYA CLIENT)
     public function store(Request $request)
     {
-        // Cek Role: Kalau bukan 'client', tolak!
+        // Validasi Role: Client Only
         if (auth()->user()->role !== 'client') {
-            return ApiFormatter::createJson(403, 'Forbidden: Hanya Client yang boleh membuat project!');
+            return ApiFormatter::createJson(403, 'Forbidden: Hanya akun Client yang boleh memposting lowongan!');
         }
 
-        // Validasi Input
         $validator = Validator::make($request->all(), [
             'category_id' => 'required|exists:categories,id',
             'title'       => 'required|string|max:255',
@@ -39,7 +39,6 @@ class ProjectController extends Controller
             return ApiFormatter::createJson(400, 'Validasi Gagal', $validator->errors());
         }
 
-        // Simpan Project
         $project = Project::create([
             'client_id'   => auth()->user()->id, 
             'category_id' => $request->category_id,
@@ -53,7 +52,7 @@ class ProjectController extends Controller
         return ApiFormatter::createJson(201, 'Project Berhasil Dibuat', $project);
     }
 
-    // 3. SHOW: Detail satu lowongan
+    // 3. SHOW DETAIL
     public function show($id)
     {
         $project = Project::with(['client', 'category'])->find($id);
@@ -65,7 +64,7 @@ class ProjectController extends Controller
         return ApiFormatter::createJson(200, 'Detail Project', $project);
     }
 
-    // 4. UPDATE: Edit Lowongan
+    // 4. UPDATE (HANYA PEMILIK)
     public function update(Request $request, $id)
     {
         $project = Project::find($id);
@@ -74,6 +73,7 @@ class ProjectController extends Controller
             return ApiFormatter::createJson(404, 'Data Project Tidak Ditemukan');
         }
 
+        // Cek apakah yang login adalah pemilik project?
         if ($project->client_id !== auth()->user()->id) {
             return ApiFormatter::createJson(403, 'Forbidden: Anda bukan pemilik project ini!');
         }
@@ -83,7 +83,7 @@ class ProjectController extends Controller
         return ApiFormatter::createJson(200, 'Project Berhasil Diupdate', $project);
     }
 
-    // 5. DELETE: Hapus Lowongan
+    // 5. DELETE (PEMILIK atau ADMIN)
     public function destroy($id)
     {
         $project = Project::find($id);
@@ -92,8 +92,11 @@ class ProjectController extends Controller
             return ApiFormatter::createJson(404, 'Data Project Tidak Ditemukan');
         }
 
-        if ($project->client_id !== auth()->user()->id) {
-            return ApiFormatter::createJson(403, 'Forbidden: Anda bukan pemilik project ini!');
+        $user = auth()->user();
+
+        // Logika: Boleh hapus jika (Dia Pemilik Project) ATAU (Dia Admin)
+        if ($project->client_id !== $user->id && $user->role !== 'admin') {
+            return ApiFormatter::createJson(403, 'Forbidden: Anda tidak punya hak menghapus project ini!');
         }
 
         $project->delete();
