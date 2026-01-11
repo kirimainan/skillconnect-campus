@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 // --- DAFTAR IMPORT (WAJIB ADA DI SINI BIAR GAK ERROR MERAH) ---
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ReviewController; // <--- TAMBAHKAN INI
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProjectController;           // <--- Ini obat error ProjectController
 use App\Http\Controllers\Api\ProjectApplicantController;  // <--- Ini obat error ProjectApplicantController
@@ -46,4 +47,13 @@ Route::middleware(['auth:api'])->group(function () {
     
     // c. Terima/Tolak Lamaran
     Route::post('update-application/{id}', [ProjectApplicantController::class, 'update']);
+
+    // ... rute bidding afriza yg tadi ...
+
+    // --- RUTE REVIEW (AFRIZA) ---
+    // 1. Kirim Review (Bintang 1-5)
+    Route::post('reviews', [ReviewController::class, 'store']);
+    
+    // 2. Lihat Review User tertentu (misal: cek reputasi Client/Mahasiswa)
+    Route::get('reviews/{userId}', [ReviewController::class, 'show']);
 });
