@@ -28,6 +28,7 @@ Route::middleware(['auth:api'])->prefix('auth')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('update-profile', [AuthController::class, 'updateProfile']);
+    Route::post('change-password', [AuthController::class, 'changePassword']);
 });
 
 // 3. PRIVATE ROUTES - FITUR APLIKASI
