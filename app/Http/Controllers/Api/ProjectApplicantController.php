@@ -6,15 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ProjectApplicant;
 use App\Models\Project;
+use App\Models\ActivityLog; // <--- WAJIB IMPORT
 use Illuminate\Support\Facades\Validator;
 use App\Helpers\ApiFormatter;
 
 class ProjectApplicantController extends Controller
 {
-    // 1. CREATE: Mahasiswa Melamar Pekerjaan
+    // 1. CREATE: Mahasiswa Melamar
     public function store(Request $request)
     {
-        // Validasi Input
         $validator = Validator::make($request->all(), [
             'project_id' => 'required|exists:projects,id',
             'message'    => 'required|string',
@@ -25,7 +25,7 @@ class ProjectApplicantController extends Controller
             return ApiFormatter::createJson(400, 'Validasi Gagal', $validator->errors());
         }
 
-        // Cek apakah user sudah pernah melamar di project ini? (Biar gak spam)
+        // Cek Spam
         $existing = ProjectApplicant::where('project_id', $request->project_id)
             ->where('user_id', auth()->user()->id)
             ->first();
@@ -34,19 +34,25 @@ class ProjectApplicantController extends Controller
             return ApiFormatter::createJson(409, 'Anda sudah melamar di project ini sebelumnya!');
         }
 
-        // Simpan Lamaran
         $applicant = ProjectApplicant::create([
             'project_id' => $request->project_id,
-            'user_id'    => auth()->user()->id, // Otomatis ambil ID user yg login
+            'user_id'    => auth()->user()->id,
             'message'    => $request->message,
             'bid_amount' => $request->bid_amount,
             'status'     => 'pending'
         ]);
 
+        // --- CCTV ---
+        ActivityLog::create([
+            'user_id' => auth()->user()->id,
+            'action'  => 'APPLY_PROJECT',
+            'description' => 'Melamar project ID: ' . $request->project_id . ' (Bid: ' . $request->bid_amount . ')'
+        ]);
+
         return ApiFormatter::createJson(201, 'Berhasil Melamar Project', $applicant);
     }
 
-    // 2. GET: Lihat List Pelamar di Project tertentu (Hanya Pemilik Project yang boleh lihat)
+    // 2. GET: Lihat Pelamar (Khusus Client Pemilik Project)
     public function show($projectId)
     {
         $project = Project::find($projectId);
@@ -55,7 +61,6 @@ class ProjectApplicantController extends Controller
             return ApiFormatter::createJson(404, 'Project tidak ditemukan');
         }
 
-        // Validasi: Yang boleh lihat pelamar cuma pemilik project
         if ($project->client_id !== auth()->user()->id) {
             return ApiFormatter::createJson(403, 'Forbidden: Anda bukan pemilik project ini');
         }
@@ -65,22 +70,19 @@ class ProjectApplicantController extends Controller
         return ApiFormatter::createJson(200, 'List Pelamar Project', $applicants);
     }
 
-    // 3. UPDATE: Client Menerima/Menolak Lamaran
+    // 3. UPDATE: Terima/Tolak (Khusus Client)
     public function update(Request $request, $id)
     {
-        // Cari data lamaran berdasarkan ID
         $applicant = ProjectApplicant::with('project')->find($id);
 
         if (!$applicant) {
             return ApiFormatter::createJson(404, 'Data lamaran tidak ditemukan');
         }
 
-        // Validasi: Pastikan yang nge-ACC adalah pemilik project
         if ($applicant->project->client_id !== auth()->user()->id) {
             return ApiFormatter::createJson(403, 'Forbidden: Anda tidak berhak mengatur lamaran ini');
         }
 
-        // Validasi Status yang dikirim
         $validator = Validator::make($request->all(), [
             'status' => 'required|in:accepted,rejected'
         ]);
@@ -89,9 +91,15 @@ class ProjectApplicantController extends Controller
             return ApiFormatter::createJson(400, 'Status harus accepted atau rejected', $validator->errors());
         }
 
-        // Update Status
         $applicant->update([
             'status' => $request->status
+        ]);
+
+        // --- CCTV ---
+        ActivityLog::create([
+            'user_id' => auth()->user()->id,
+            'action'  => 'UPDATE_APPLICATION',
+            'description' => 'Mengubah status lamaran ID ' . $id . ' menjadi: ' . $request->status
         ]);
 
         return ApiFormatter::createJson(200, 'Status lamaran berhasil diperbarui', $applicant);

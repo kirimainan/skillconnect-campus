@@ -2,13 +2,12 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-// --- DAFTAR IMPORT (WAJIB ADA DI SINI BIAR GAK ERROR MERAH) ---
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\ReviewController; // <--- TAMBAHKAN INI
+use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\CategoryController;
-use App\Http\Controllers\Api\ProjectController;           // <--- Ini obat error ProjectController
-use App\Http\Controllers\Api\ProjectApplicantController;  // <--- Ini obat error ProjectApplicantController
+use App\Http\Controllers\Api\ProjectApplicantController;
+use App\Http\Controllers\Api\ReviewController;
+use App\Http\Controllers\Api\ActivityLogController; // <--- PASTIKAN ADA INI
 
 /*
 |--------------------------------------------------------------------------
@@ -16,45 +15,47 @@ use App\Http\Controllers\Api\ProjectApplicantController;  // <--- Ini obat error
 |--------------------------------------------------------------------------
 */
 
-// 1. PUBLIC ROUTES (Register & Login)
+// AUTH
 Route::group(['prefix' => 'auth'], function () {
     Route::post('register', [AuthController::class, 'register']);
     Route::post('login', [AuthController::class, 'login']);
 });
 
-// 2. PRIVATE ROUTES - USER AUTH (Logout, Profile, Me)
-Route::middleware(['auth:api'])->prefix('auth')->group(function () {
+// PRIVATE ROUTES (Harus Login / Punya Token)
+Route::group(['middleware' => ['auth:api']], function () {
+
+    // AUTH ACTIONS
     Route::get('me', [AuthController::class, 'me']);
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('update-profile', [AuthController::class, 'updateProfile']);
     Route::post('change-password', [AuthController::class, 'changePassword']);
-});
 
-// 3. PRIVATE ROUTES - FITUR APLIKASI
-Route::middleware(['auth:api'])->group(function () {
-    
-    // --- FITUR MIRANDA ---
-    Route::apiResource('categories', CategoryController::class);
-    Route::apiResource('projects', ProjectController::class);
+    // CATEGORIES (Admin Only di Controller)
+    Route::get('categories', [CategoryController::class, 'index']); // Public read
+    Route::post('categories', [CategoryController::class, 'store']);
+    Route::get('categories/{id}', [CategoryController::class, 'show']);
+    Route::post('categories/{id}', [CategoryController::class, 'update']); // Pakai POST method spoofing buat update
+    Route::delete('categories/{id}', [CategoryController::class, 'destroy']);
 
-    // --- FITUR AFRIZA (BIDDING) ---
-    
-    // a. Melamar kerja
-    Route::post('apply-project', [ProjectApplicantController::class, 'store']);
-    
-    // b. Lihat pelamar di project tertentu
-    Route::get('project-applicants/{projectId}', [ProjectApplicantController::class, 'show']);
-    
-    // c. Terima/Tolak Lamaran
-    Route::post('update-application/{id}', [ProjectApplicantController::class, 'update']);
+    // PROJECTS
+    Route::get('projects', [ProjectController::class, 'index']);
+    Route::post('projects', [ProjectController::class, 'store']); // Client Create
+    Route::get('projects/{id}', [ProjectController::class, 'show']);
+    Route::post('projects/{id}', [ProjectController::class, 'update']);
+    Route::delete('projects/{id}', [ProjectController::class, 'destroy']);
 
-    // ... rute bidding afriza yg tadi ...
+    // BIDDING / LAMARAN
+    Route::post('apply-project', [ProjectApplicantController::class, 'store']); // Mahasiswa Melamar
+    Route::get('project-applicants/{projectId}', [ProjectApplicantController::class, 'show']); // Client Liat Pelamar
+    Route::post('update-application/{id}', [ProjectApplicantController::class, 'update']); // Client Terima/Tolak
 
-    // --- RUTE REVIEW (AFRIZA) ---
-    // 1. Kirim Review (Bintang 1-5)
+    // REVIEWS
     Route::post('reviews', [ReviewController::class, 'store']);
-    
-    // 2. Lihat Review User tertentu (misal: cek reputasi Client/Mahasiswa)
     Route::get('reviews/{userId}', [ReviewController::class, 'show']);
+    Route::delete('reviews/{id}', [ReviewController::class, 'destroy']); // Admin Hapus Review
+
+    // --- ACTIVITY LOG (CCTV) ---
+    // INI YANG HILANG TADI:
+    Route::get('activity-logs', [ActivityLogController::class, 'index']);
 });

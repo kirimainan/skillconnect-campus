@@ -7,20 +7,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Models\User;
+use App\Models\ActivityLog; // <--- JANGAN LUPA IMPORT INI LAGI
 use Illuminate\Support\Facades\Hash;
 use App\Helpers\ApiFormatter;
 use Carbon\Carbon;
 
 class AuthController extends Controller
 {
-    // 1. REGISTER: Validasi Role Diperketat
+    // 1. REGISTER
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name'      => 'required|string|max:255',
             'email'     => 'required|string|email|max:255|unique:users',
             'password'  => 'required|string|min:6',
-            // Hanya izinkan role ini. Admin ditambahkan.
             'role'      => 'required|in:mahasiswa,client,admin', 
         ]);
 
@@ -35,7 +35,6 @@ class AuthController extends Controller
             'role'      => $request->role,
         ]);
 
-        // Generate Token untuk user baru
         $token = JWTAuth::fromUser($user);
 
         return ApiFormatter::createJson(201, 'Register Berhasil', [
@@ -44,7 +43,7 @@ class AuthController extends Controller
         ]);
     }
 
-    // 2. LOGIN
+    // 2. LOGIN (Inject CCTV Disini)
     public function login(Request $request)
     {
         try {
@@ -57,23 +56,27 @@ class AuthController extends Controller
                 return response()->json(ApiFormatter::createJson(400, 'Bad Request', $validator->errors()->all()), 400);
             }
 
-            // Cari user
             $user = User::where('email', $request->email)->first();
             if (!$user) {
                 return response()->json(ApiFormatter::createJson(404, 'Account not found'), 404);
             }
 
-            // Cek Password
             if (!Hash::check($request->password, $user->password)) {
                 return response()->json(ApiFormatter::createJson(401, 'Password does not match'), 401);
             }
 
-            // Generate Token
             if (!$token = JWTAuth::fromUser($user)) {
                 return response()->json(ApiFormatter::createJson(500, 'Failed to generate token'), 500);
             }
 
-            // Format Respon Token
+            // --- AFRIZA: PASANG CCTV ---
+            ActivityLog::create([
+                'user_id' => $user->id,
+                'action'  => 'LOGIN',
+                'description' => 'User (Role: '.$user->role.') berhasil login.'
+            ]);
+            // --------------------------
+
             $currentDateTime = Carbon::now();
             $expirationDateTime = $currentDateTime->addSeconds(JWTAuth::factory()->getTTL() * 60);
 
@@ -83,7 +86,6 @@ class AuthController extends Controller
                 'expires' => $expirationDateTime->format('Y-m-d H:i:s')
             ];
 
-            // Masukkan data user agar frontend tahu role-nya
             return response()->json(ApiFormatter::createJson(200, 'Login successful', [
                 'user' => $user,
                 'auth' => $info
@@ -94,7 +96,7 @@ class AuthController extends Controller
         }
     }
 
-    // 3. ME (Cek User Login)
+    // 3. ME
     public function me()
     {
         try {
@@ -128,20 +130,18 @@ class AuthController extends Controller
         if ($token) {
             JWTAuth::invalidate($token);
         }
-
         return response()->json(ApiFormatter::createJson(200, 'Successfully logged out'), 200);
     }
 
-    // 6. UPDATE PROFILE (HANYA Data Diri, TIDAK BISA Ganti Password/Role)
+    // 6. UPDATE PROFILE (Inject CCTV Disini)
     public function updateProfile(Request $request)
     {
-        $user = JWTAuth::parseToken()->authenticate(); // Ambil user dari token
+        $user = JWTAuth::parseToken()->authenticate();
 
-        // Validasi input
         $validator = Validator::make($request->all(), [
             'name'   => 'required|string|max:255',
             'email'  => 'required|email|unique:users,email,' . $user->id,
-            'photo'  => 'nullable|image|max:2048', // Max 2MB
+            'photo'  => 'nullable|image|max:2048',
             'phone'  => 'nullable|string',
             'skills' => 'nullable|string'
         ]);
@@ -150,13 +150,11 @@ class AuthController extends Controller
             return ApiFormatter::createJson(400, 'Validasi Gagal', $validator->errors());
         }
 
-        // Logic Upload Foto
         if ($request->hasFile('photo')) {
             $path = $request->file('photo')->store('photos', 'public');
             $user->photo = $path;
         }
 
-        // Update data text (Role & Password DIABAIKAN disini demi keamanan)
         $user->name   = $request->name;
         $user->email  = $request->email;
         $user->phone  = $request->phone;
@@ -164,16 +162,23 @@ class AuthController extends Controller
 
         $user->save();
 
+        // --- AFRIZA: PASANG CCTV ---
+        ActivityLog::create([
+            'user_id' => $user->id,
+            'action'  => 'UPDATE_PROFILE',
+            'description' => 'User memperbarui data profil.'
+        ]);
+        // --------------------------
+
         return ApiFormatter::createJson(200, 'Profile Berhasil Diupdate', $user);
     }
 
-    // 7. CHANGE PASSWORD (Fitur Baru - Lebih Aman)
+    // 7. CHANGE PASSWORD (Inject CCTV Disini)
     public function changePassword(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'old_password' => 'required',
             'new_password' => 'required|string|min:6|confirmed' 
-            // Wajib kirim: old_password, new_password, new_password_confirmation
         ]);
 
         if ($validator->fails()) {
@@ -182,15 +187,21 @@ class AuthController extends Controller
 
         $user = JWTAuth::parseToken()->authenticate();
 
-        // 1. Cek Password Lama
         if (!Hash::check($request->old_password, $user->password)) {
             return ApiFormatter::createJson(400, 'Gagal: Password lama tidak sesuai');
         }
 
-        // 2. Update Password Baru
         $user->update([
             'password' => Hash::make($request->new_password)
         ]);
+
+        // --- AFRIZA: PASANG CCTV ---
+        ActivityLog::create([
+            'user_id' => $user->id,
+            'action'  => 'CHANGE_PASSWORD',
+            'description' => 'User berhasil mengganti password.'
+        ]);
+        // --------------------------
 
         return ApiFormatter::createJson(200, 'Password Berhasil Diganti');
     }

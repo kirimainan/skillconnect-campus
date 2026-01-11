@@ -5,23 +5,22 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\ActivityLog; // <--- IMPORT WAJIB
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use App\Helpers\ApiFormatter;
 
 class CategoryController extends Controller
 {
-    // 1. GET ALL (Bisa diakses siapa saja yang login)
     public function index()
     {
         $categories = Category::all();
         return ApiFormatter::createJson(200, 'List Data Kategori', $categories);
     }
 
-    // 2. CREATE (HANYA ADMIN)
+    // CREATE (Inject CCTV)
     public function store(Request $request)
     {
-        // Validasi Role: Admin Only
         if (auth()->user()->role !== 'admin') {
             return ApiFormatter::createJson(403, 'Forbidden: Hanya Admin yang boleh menambah kategori!');
         }
@@ -39,10 +38,17 @@ class CategoryController extends Controller
             'slug' => Str::slug($request->name)
         ]);
 
+        // --- AFRIZA: LOG ACTIVITY ---
+        ActivityLog::create([
+            'user_id' => auth()->user()->id,
+            'action'  => 'CREATE_CATEGORY',
+            'description' => 'Admin membuat kategori baru: ' . $request->name
+        ]);
+        // ---------------------------
+
         return ApiFormatter::createJson(201, 'Kategori Berhasil Ditambahkan', $category);
     }
 
-    // 3. SHOW DETAIL (Bisa diakses siapa saja yang login)
     public function show($id)
     {
         $category = Category::find($id);
@@ -54,10 +60,8 @@ class CategoryController extends Controller
         return ApiFormatter::createJson(200, 'Detail Kategori', $category);
     }
 
-    // 4. UPDATE (HANYA ADMIN)
     public function update(Request $request, $id)
     {
-        // Validasi Role: Admin Only
         if (auth()->user()->role !== 'admin') {
             return ApiFormatter::createJson(403, 'Forbidden: Hanya Admin yang boleh edit kategori!');
         }
@@ -84,10 +88,9 @@ class CategoryController extends Controller
         return ApiFormatter::createJson(200, 'Kategori Berhasil Diupdate', $category);
     }
 
-    // 5. DELETE (HANYA ADMIN)
+    // DELETE (Inject CCTV)
     public function destroy($id)
     {
-        // Validasi Role: Admin Only
         if (auth()->user()->role !== 'admin') {
             return ApiFormatter::createJson(403, 'Forbidden: Hanya Admin yang boleh hapus kategori!');
         }
@@ -99,6 +102,14 @@ class CategoryController extends Controller
         }
 
         $category->delete();
+
+        // --- AFRIZA: LOG ACTIVITY ---
+        ActivityLog::create([
+            'user_id' => auth()->user()->id,
+            'action'  => 'DELETE_CATEGORY',
+            'description' => 'Admin menghapus kategori ID ' . $id
+        ]);
+        // ---------------------------
 
         return ApiFormatter::createJson(200, 'Kategori Berhasil Dihapus');
     }

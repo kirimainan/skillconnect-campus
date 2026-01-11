@@ -5,24 +5,21 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\ActivityLog; // <--- IMPORT WAJIB
 use Illuminate\Support\Facades\Validator;
 use App\Helpers\ApiFormatter;
 
 class ProjectController extends Controller
 {
-    // 1. GET ALL
     public function index()
     {
-        // Menampilkan data project beserta nama Client dan Kategorinya
         $projects = Project::with(['client:id,name,photo', 'category:id,name'])->get();
-
         return ApiFormatter::createJson(200, 'List Data Project', $projects);
     }
 
-    // 2. CREATE (HANYA CLIENT)
+    // CREATE (Inject CCTV)
     public function store(Request $request)
     {
-        // Validasi Role: Client Only
         if (auth()->user()->role !== 'client') {
             return ApiFormatter::createJson(403, 'Forbidden: Hanya akun Client yang boleh memposting lowongan!');
         }
@@ -49,10 +46,17 @@ class ProjectController extends Controller
             'status'      => 'open'
         ]);
 
+        // --- AFRIZA: LOG ACTIVITY ---
+        ActivityLog::create([
+            'user_id' => auth()->user()->id,
+            'action'  => 'CREATE_PROJECT',
+            'description' => 'Membuat project baru: ' . $request->title
+        ]);
+        // ---------------------------
+
         return ApiFormatter::createJson(201, 'Project Berhasil Dibuat', $project);
     }
 
-    // 3. SHOW DETAIL
     public function show($id)
     {
         $project = Project::with(['client', 'category'])->find($id);
@@ -64,7 +68,7 @@ class ProjectController extends Controller
         return ApiFormatter::createJson(200, 'Detail Project', $project);
     }
 
-    // 4. UPDATE (HANYA PEMILIK)
+    // UPDATE (Inject CCTV)
     public function update(Request $request, $id)
     {
         $project = Project::find($id);
@@ -73,17 +77,24 @@ class ProjectController extends Controller
             return ApiFormatter::createJson(404, 'Data Project Tidak Ditemukan');
         }
 
-        // Cek apakah yang login adalah pemilik project?
         if ($project->client_id !== auth()->user()->id) {
             return ApiFormatter::createJson(403, 'Forbidden: Anda bukan pemilik project ini!');
         }
 
         $project->update($request->all());
 
+        // --- AFRIZA: LOG ACTIVITY ---
+        ActivityLog::create([
+            'user_id' => auth()->user()->id,
+            'action'  => 'UPDATE_PROJECT',
+            'description' => 'Update project ID ' . $id
+        ]);
+        // ---------------------------
+
         return ApiFormatter::createJson(200, 'Project Berhasil Diupdate', $project);
     }
 
-    // 5. DELETE (PEMILIK atau ADMIN)
+    // DELETE (Inject CCTV)
     public function destroy($id)
     {
         $project = Project::find($id);
@@ -94,12 +105,19 @@ class ProjectController extends Controller
 
         $user = auth()->user();
 
-        // Logika: Boleh hapus jika (Dia Pemilik Project) ATAU (Dia Admin)
         if ($project->client_id !== $user->id && $user->role !== 'admin') {
             return ApiFormatter::createJson(403, 'Forbidden: Anda tidak punya hak menghapus project ini!');
         }
 
         $project->delete();
+
+        // --- AFRIZA: LOG ACTIVITY ---
+        ActivityLog::create([
+            'user_id' => $user->id,
+            'action'  => 'DELETE_PROJECT',
+            'description' => 'Menghapus project ID ' . $id . ' (Dilakukan oleh role: ' . $user->role . ')'
+        ]);
+        // ---------------------------
 
         return ApiFormatter::createJson(200, 'Project Berhasil Dihapus');
     }
