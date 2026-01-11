@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->string('email')->unique();
             $table->string('password');
             // Kolom khusus SkillConnect
-            $table->enum('role', ['mahasiswa', 'client'])->default('mahasiswa');
+            $table->enum('role', ['mahasiswa', 'client', 'admin'])->default('mahasiswa');
             $table->string('photo')->nullable();
             $table->text('skills')->nullable(); // Untuk menyimpan skill mahasiswa
             $table->string('phone')->nullable();
