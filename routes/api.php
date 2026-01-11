@@ -3,7 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\CategoryController; // <--- Pastikan ini ada!
+use App\Http\Controllers\Api\CategoryController; // <--- Pastikan ini ada!\
+use App\Http\Controllers\Api\ProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,4 +35,5 @@ Route::middleware(['auth:api'])->group(function () {
     Route::apiResource('categories', CategoryController::class);
 
     // Nanti Project ditaruh sini juga
+    Route::apiResource('projects', ProjectController::class);
 });
