@@ -74,4 +74,4 @@ php artisan serve
 ```
 
 ## Dokumentasi API
-- Postman Collection (publish): (isi disini bg Davin)
+- Postman Collection (publish): https://documenter.getpostman.com/view/49036461/2sBXVfjBSo
