@@ -1,0 +1,5597 @@
+{
+	"info": {
+		"_postman_id": "7e3f6bd5-5543-4fbc-b9c8-7ed01a8779ef",
+		"name": "UAS-PWS-SKILLCONNECT-CAMPUS Fix final",
+		"description": "# 🚀 SkillConnect Campus API Documentation\n\nDokumentasi resmi API untuk backend aplikasi **SkillConnect Campus**, sebuah platform marketplace jasa digital yang mempertemukan Mahasiswa (Freelancer) dengan Client (Pemberi Project) di lingkungan Universitas Bumigora.\n\nSistem ini dibangun menggunakan **Laravel Framework** dan menerapkan standar keamanan RESTful API.\n\n## 🔑 Fitur Utama & Keamanan\n\n1. **Authentication (JWT):** Menggunakan JSON Web Token untuk keamanan sesi login.\n    \n2. **Role-Based Access Control (RBAC):** Sistem membedakan hak akses untuk 3 role pengguna:\n    \n    - **Admin:** Moderator sistem (Kelola Kategori, Hapus Project/Review tidak pantas).\n        \n    - **Client:** User yang memposting lowongan pekerjaan/project.\n        \n    - **Mahasiswa:** User yang mencari project dan mengirim lamaran (Bidding).\n        \n3. **Activity Logging:** Mencatat setiap aktivitas penting user untuk audit keamanan.\n    \n\n## 📂 Struktur Modul\n\n- **Authentication:** Register, Login, Logout, Update Profile, Change Password.\n    \n- **Categories:** CRUD Master Data Kategori (Khusus Admin).\n    \n- **Projects:** Manajemen postingan lowongan kerja (CRUD).\n    \n- **Bidding System:** Alur melamar kerja (Mahasiswa) dan seleksi pelamar (Client).\n    \n- **Review System:** Sistem rating dan ulasan timbal balik antara Client dan Mahasiswa.\n    \n\n## 📝 Cara Penggunaan\n\n1. Lakukan **Register** akun baru sesuai role yang diinginkan.\n    \n2. Lakukan **Login** untuk mendapatkan `access_token`.\n    \n3. Masukkan token ke tab **Authorization > Bearer Token** untuk mengakses endpoint yang terkunci (gembok).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49036461"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Davin",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "davinj@skillconnect.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "rahasia123",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "mahasiswa",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						},
+						"description": "## 1.1 Register (Daftar Akun)\n\nEndpoint: POST /auth/register\n\nDeskripsi: Mendaftarkan pengguna baru (Mahasiswa, Client, atau Admin).\n\nBody (form-data/x-www-form-urlencoded):\n\nname: (string) Nama Lengkap\n\nemail: (string) Email Unik\n\npassword: (string) Minimal 6 karakter\n\nrole: (string) Pilihan: mahasiswa, client, atau admin"
+					},
+					"response": [
+						{
+							"name": "Register as Mahasiswa Succes",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Davin",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "davinjulhan@skillconnect.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "rahasia123",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "mahasiswa",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 10 Jan 2026 09:41:01 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 201,\n    \"message\": \"Register Berhasil\",\n    \"data\": {\n        \"user\": {\n            \"name\": \"Davin\",\n            \"email\": \"davinjulhan@skillconnect.com\",\n            \"role\": \"mahasiswa\",\n            \"updated_at\": \"2026-01-10T09:41:00.000000Z\",\n            \"created_at\": \"2026-01-10T09:41:00.000000Z\",\n            \"id\": 2\n        },\n        \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvcmVnaXN0ZXIiLCJpYXQiOjE3NjgwMzgwNjEsImV4cCI6MTc2ODA0MTY2MSwibmJmIjoxNzY4MDM4MDYxLCJqdGkiOiJZWEtNT2VGQnU4SUhUZ0ZqIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.DldesaiqGzxn1yqPhxOCSYaQ6iwWLcPI2Y6-PDji2B0\"\n    }\n}"
+						},
+						{
+							"name": "email has already been taken",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Davin",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "davin@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "rahasia123",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "mahasiswa",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 09:32:14 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 09:32:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.4"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 400,\n    \"message\": \"Gagal Validasi\",\n    \"data\": {\n        \"email\": [\n            \"The email has already been taken.\"\n        ]\n    }\n}"
+						},
+						{
+							"name": "Register as Client Succes",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Mayra",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "mayra@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "rahasia123",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "client",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 21:56:35 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 201,\n    \"message\": \"Register Berhasil\",\n    \"data\": {\n        \"user\": {\n            \"name\": \"Mayra\",\n            \"email\": \"mayra@gmail.com\",\n            \"role\": \"client\",\n            \"updated_at\": \"2026-01-11T21:56:33.000000Z\",\n            \"created_at\": \"2026-01-11T21:56:33.000000Z\",\n            \"id\": 1\n        },\n        \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvcmVnaXN0ZXIiLCJpYXQiOjE3NjgxNjg1OTQsImV4cCI6MTc2ODE3MjE5NCwibmJmIjoxNzY4MTY4NTk0LCJqdGkiOiJLZG5xbWFwaG1BVklEeGQ3Iiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.lOCaPbTTKxCUdTKTchsnBhRGpYI9C17nhHbvd2puStM\"\n    }\n}"
+						},
+						{
+							"name": "Register as Admin Succes",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Admin",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "Admin@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "rahasia123",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "admin",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 21:57:58 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 201,\n    \"message\": \"Register Berhasil\",\n    \"data\": {\n        \"user\": {\n            \"name\": \"Admin\",\n            \"email\": \"Admin@gmail.com\",\n            \"role\": \"admin\",\n            \"updated_at\": \"2026-01-11T21:57:58.000000Z\",\n            \"created_at\": \"2026-01-11T21:57:58.000000Z\",\n            \"id\": 2\n        },\n        \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvcmVnaXN0ZXIiLCJpYXQiOjE3NjgxNjg2NzgsImV4cCI6MTc2ODE3MjI3OCwibmJmIjoxNzY4MTY4Njc4LCJqdGkiOiJ5VHVaWHBHUldmMFZsYk5kIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.7jR4LVEWlRNzhPPMl2PheFmhjNUo_Lvk9L-B5aNLTv4\"\n    }\n}"
+						},
+						{
+							"name": "Register  required The name field.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "davinj@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "rahasia123",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "mahasiswa",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 21:59:29 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "57"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 400,\n    \"message\": \"Gagal Validasi\",\n    \"data\": {\n        \"name\": [\n            \"The name field is required.\"\n        ]\n    }\n}"
+						},
+						{
+							"name": "Register  required The Email field.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Davin",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "rahasia123",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "mahasiswa",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 22:00:28 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 400,\n    \"message\": \"Gagal Validasi\",\n    \"data\": {\n        \"email\": [\n            \"The email field is required.\"\n        ]\n    }\n}"
+						},
+						{
+							"name": "Register  required The Name & Email field.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "rahasia123",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "mahasiswa",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 22:01:01 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 400,\n    \"message\": \"Gagal Validasi\",\n    \"data\": {\n        \"name\": [\n            \"The name field is required.\"\n        ],\n        \"email\": [\n            \"The email field is required.\"\n        ]\n    }\n}"
+						},
+						{
+							"name": "Register  required The Name & Email & Password field.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "mahasiswa",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 22:01:40 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 400,\n    \"message\": \"Gagal Validasi\",\n    \"data\": {\n        \"name\": [\n            \"The name field is required.\"\n        ],\n        \"email\": [\n            \"The email field is required.\"\n        ],\n        \"password\": [\n            \"The password field is required.\"\n        ]\n    }\n}"
+						},
+						{
+							"name": "Register  required The Password field.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Davin",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "davinj@skillconnect.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "mahasiswa",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 22:02:30 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 400,\n    \"message\": \"Gagal Validasi\",\n    \"data\": {\n        \"password\": [\n            \"The password field is required.\"\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "admin@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "rahasia123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "## 1.2 Login (Masuk)\n\nEndpoint: POST /auth/login\n\nDeskripsi: Masuk untuk mendapatkan Token.\n\nBody:\n\nemail: (string)\n\npassword: (string)\n\nResponse Sukses: Mengembalikan access_token yang wajib dipakai untuk request lain."
+					},
+					"response": [
+						{
+							"name": "Login Succes",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "davin@skillconnect.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "rahasia123",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 10 Jan 2026 09:49:05 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"headers\": {},\n    \"original\": {\n        \"code\": 200,\n        \"message\": \"Login successful\",\n        \"data\": {\n            \"type\": \"Bearer\",\n            \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgwMzg1NDUsImV4cCI6MTc2ODA0MjE0NSwibmJmIjoxNzY4MDM4NTQ1LCJqdGkiOiJWOWdremFiR2JtUHRLTTdQIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.TJfLyCP0vHUY1xyGxGKUFRlQCyfXT1f9XBus4kEf_QU\",\n            \"expires\": \"2026-01-10 10:49:05\"\n        }\n    },\n    \"exception\": null\n}"
+						},
+						{
+							"name": "Login required The Password field.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "mayra@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "rahasia123",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 22:04:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"headers\": {},\n    \"original\": {\n        \"code\": 400,\n        \"message\": \"Bad Request\",\n        \"data\": [\n            \"The password field is required.\"\n        ]\n    },\n    \"exception\": null\n}"
+						},
+						{
+							"name": "Login  required The Email field.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "mayra@gmail.com",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "password",
+											"value": "rahasia123",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 22:05:20 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"headers\": {},\n    \"original\": {\n        \"code\": 400,\n        \"message\": \"Bad Request\",\n        \"data\": [\n            \"The email field is required.\"\n        ]\n    },\n    \"exception\": null\n}"
+						},
+						{
+							"name": "Login  required The Email & Password field.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "mayra@gmail.com",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "password",
+											"value": "rahasia123",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 22:06:46 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"headers\": {},\n    \"original\": {\n        \"code\": 400,\n        \"message\": \"Bad Request\",\n        \"data\": [\n            \"The email field is required.\",\n            \"The password field is required.\"\n        ]\n    },\n    \"exception\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Login Check",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgxNjkyODEsImV4cCI6MTc2ODE3Mjg4MSwibmJmIjoxNzY4MTY5MjgxLCJqdGkiOiJIRlkzMW1uR0VyV0hvMDBEIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.upjQ-cvLUM_mUC23iVod5DJvP4XSG2BfYaqa5pHCxsg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURLLaravel}}/api/me",
+							"host": [
+								"{{baseURLLaravel}}"
+							],
+							"path": [
+								"api",
+								"me"
+							]
+						},
+						"description": "## 1.3 Login Check (Me)  \nEndpoint: GET /auth/me\n\nHeader: Authorization: Bearer\n\nDeskripsi: Mengecek data user yang sedang login (berguna untuk Frontend menyimpan state user)."
+					},
+					"response": [
+						{
+							"name": "Login CHeck Succes",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/me",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 10 Jan 2026 09:50:45 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"headers\": {},\n    \"original\": {\n        \"code\": 200,\n        \"message\": \"Logged in User\",\n        \"data\": {\n            \"name\": \"Kirimao\",\n            \"email\": \"davin@skillconnect.com\",\n            \"exp\": \"2026-01-10 10:49:05\"\n        }\n    },\n    \"exception\": null\n}"
+						},
+						{
+							"name": "Login Check Unauthenticated",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURLLaravel}}/api/me",
+									"host": [
+										"{{baseURLLaravel}}"
+									],
+									"path": [
+										"api",
+										"me"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 22:40:27 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthenticated.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgwMzg1NDUsImV4cCI6MTc2ODA0MjE0NSwibmJmIjoxNzY4MDM4NTQ1LCJqdGkiOiJWOWdremFiR2JtUHRLTTdQIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.TJfLyCP0vHUY1xyGxGKUFRlQCyfXT1f9XBus4kEf_QU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURLLaravel}}/api/logout",
+							"host": [
+								"{{baseURLLaravel}}"
+							],
+							"path": [
+								"api",
+								"logout"
+							]
+						},
+						"description": "## 1.4 Logout  \nEndpoint: POST /auth/logout\n\nHeader: Authorization: Bearer\n\nDeskripsi: Menghapus sesi token user."
+					},
+					"response": [
+						{
+							"name": "Logout Succes",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/logout",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 10 Jan 2026 09:52:18 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"headers\": {},\n    \"original\": {\n        \"code\": 200,\n        \"message\": \"Successfully logged out\",\n        \"data\": []\n    },\n    \"exception\": null\n}"
+						},
+						{
+							"name": "Logout Unauthenticated",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURLLaravel}}/api/logout",
+									"host": [
+										"{{baseURLLaravel}}"
+									],
+									"path": [
+										"api",
+										"logout"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 22:41:33 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthenticated.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgxNjkyODEsImV4cCI6MTc2ODE3Mjg4MSwibmJmIjoxNzY4MTY5MjgxLCJqdGkiOiJIRlkzMW1uR0VyV0hvMDBEIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.upjQ-cvLUM_mUC23iVod5DJvP4XSG2BfYaqa5pHCxsg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Kirimainan",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/C:/Users/User/Downloads/smartlamp 2 lamp.png"
+								},
+								{
+									"key": "email",
+									"value": "davin@skillconnect.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "skills",
+									"value": "Web Development",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "082341921638",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURLLaravel}}/api/update-profile",
+							"host": [
+								"{{baseURLLaravel}}"
+							],
+							"path": [
+								"api",
+								"update-profile"
+							]
+						},
+						"description": "## 1.5 Update Profile  \nEndpoint: POST /auth/update-profile\n\nHeader: Authorization: Bearer\n\nDeskripsi: Mengupdate nama, email, atau foto profil.\n\nBody:\n\nname: (string)\n\nphoto: (file/image) Opsional"
+					},
+					"response": [
+						{
+							"name": "Update Profile Succes",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Kirimainan",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/C:/Users/User/Downloads/smartlamp 2 lamp.png"
+										},
+										{
+											"key": "email",
+											"value": "davin@skillconnect.com",
+											"type": "text"
+										},
+										{
+											"key": "skills",
+											"value": "Web Development",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "082341921638",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseURLLaravel}}/api/update-profile",
+									"host": [
+										"{{baseURLLaravel}}"
+									],
+									"path": [
+										"api",
+										"update-profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 22:46:40 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Profile Berhasil Diupdate\",\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Kirimainan\",\n        \"email\": \"davin@skillconnect.com\",\n        \"role\": \"client\",\n        \"photo\": \"photos/A5r3bX5Z47VdesQyhlpmO379CnxiuT71fASwnVWV.png\",\n        \"skills\": \"Web Development\",\n        \"phone\": \"082341921638\",\n        \"created_at\": \"2026-01-11T21:56:33.000000Z\",\n        \"updated_at\": \"2026-01-11T22:46:40.000000Z\"\n    }\n}"
+						},
+						{
+							"name": "Update Profile email field is required",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Kirimainan",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/C:/Users/User/Downloads/smartlamp 2 lamp.png"
+										},
+										{
+											"key": "email",
+											"value": "davin@skillconnect.com",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "skills",
+											"value": "Web Development",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "082341921638",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseURLLaravel}}/api/update-profile",
+									"host": [
+										"{{baseURLLaravel}}"
+									],
+									"path": [
+										"api",
+										"update-profile"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 22:47:15 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 400,\n    \"message\": \"Validasi Gagal\",\n    \"data\": {\n        \"email\": [\n            \"The email field is required.\"\n        ]\n    }\n}"
+						},
+						{
+							"name": "Update Profile The email field is required",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Kirimainan",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/C:/Users/User/Downloads/smartlamp 2 lamp.png"
+										},
+										{
+											"key": "email",
+											"value": "davin@skillconnect.com",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "skills",
+											"value": "Web Development",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "082341921638",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseURLLaravel}}/api/update-profile",
+									"host": [
+										"{{baseURLLaravel}}"
+									],
+									"path": [
+										"api",
+										"update-profile"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 22:50:00 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 400,\n    \"message\": \"Validasi Gagal\",\n    \"data\": {\n        \"email\": [\n            \"The email field is required.\"\n        ]\n    }\n}"
+						},
+						{
+							"name": "Update Profile The email & name field is required",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Kirimainan",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/C:/Users/User/Downloads/smartlamp 2 lamp.png"
+										},
+										{
+											"key": "email",
+											"value": "davin@skillconnect.com",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "skills",
+											"value": "Web Development",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "082341921638",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseURLLaravel}}/api/update-profile",
+									"host": [
+										"{{baseURLLaravel}}"
+									],
+									"path": [
+										"api",
+										"update-profile"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 22:50:30 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 400,\n    \"message\": \"Validasi Gagal\",\n    \"data\": {\n        \"name\": [\n            \"The name field is required.\"\n        ],\n        \"email\": [\n            \"The email field is required.\"\n        ]\n    }\n}"
+						}
+					]
+				}
+			],
+			"description": "Fitur untuk login, register, dan manajemen sesi user."
+		},
+		{
+			"name": "Categories CRUD",
+			"item": [
+				{
+					"name": "Create Categories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgxNzI1MTIsImV4cCI6MTc2ODE3NjExMiwibmJmIjoxNzY4MTcyNTEyLCJqdGkiOiJzZ1paZXpGY3J4S0R0OWl2Iiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.g9tYliimkvghab09zdIJdlm4bjnTm4iIm71wJcErNHQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "App Development",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURLLaravel}}/api/categories",
+							"host": [
+								"{{baseURLLaravel}}"
+							],
+							"path": [
+								"api",
+								"categories"
+							]
+						},
+						"description": "## 2.1 Create Categories  \nEndpoint: POST /categories\n\nAkses: Admin Only\n\nBody:\n\nname: (string) Nama Kategori (misal: \"Web Development\")"
+					},
+					"response": [
+						{
+							"name": "Create Categories Unauthenticated",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Web Development",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseURLLaravel}}/api/categories",
+									"host": [
+										"{{baseURLLaravel}}"
+									],
+									"path": [
+										"api",
+										"categories"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 22:53:46 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthenticated.\"\n}"
+						},
+						{
+							"name": "Create Categories As Admin Succes",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Web Development",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseURLLaravel}}/api/categories",
+									"host": [
+										"{{baseURLLaravel}}"
+									],
+									"path": [
+										"api",
+										"categories"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 22:54:49 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 201,\n    \"message\": \"Kategori Berhasil Ditambahkan\",\n    \"data\": {\n        \"name\": \"Web Development\",\n        \"slug\": \"web-development\",\n        \"updated_at\": \"2026-01-11T22:54:49.000000Z\",\n        \"created_at\": \"2026-01-11T22:54:49.000000Z\",\n        \"id\": 1\n    }\n}"
+						},
+						{
+							"name": "Create Categories As Client Forbidden : Hanya Admin yang boleh menambah kategori!",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Web Development",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseURLLaravel}}/api/categories",
+									"host": [
+										"{{baseURLLaravel}}"
+									],
+									"path": [
+										"api",
+										"categories"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 22:55:49 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 403,\n    \"message\": \"Forbidden: Hanya Admin yang boleh menambah kategori!\",\n    \"data\": []\n}"
+						},
+						{
+							"name": "Create Categories As Mahasiswa Forbidden : Hanya Admin yang boleh menambah kategori!",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Web Development",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseURLLaravel}}/api/categories",
+									"host": [
+										"{{baseURLLaravel}}"
+									],
+									"path": [
+										"api",
+										"categories"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 22:57:39 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 403,\n    \"message\": \"Forbidden: Hanya Admin yang boleh menambah kategori!\",\n    \"data\": []\n}"
+						},
+						{
+							"name": "Create Categories Failed Categories already been taken",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Web Development",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseURLLaravel}}/api/categories",
+									"host": [
+										"{{baseURLLaravel}}"
+									],
+									"path": [
+										"api",
+										"categories"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 23:02:13 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 400,\n    \"message\": \"Validasi Gagal\",\n    \"data\": {\n        \"name\": [\n            \"The name has already been taken.\"\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Read Categories",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvcmVnaXN0ZXIiLCJpYXQiOjE3NjgwMzgwNjEsImV4cCI6MTc2ODA0MTY2MSwibmJmIjoxNzY4MDM4MDYxLCJqdGkiOiJZWEtNT2VGQnU4SUhUZ0ZqIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.DldesaiqGzxn1yqPhxOCSYaQ6iwWLcPI2Y6-PDji2B0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Web Development",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURLLaravel}}/api/categories",
+							"host": [
+								"{{baseURLLaravel}}"
+							],
+							"path": [
+								"api",
+								"categories"
+							]
+						},
+						"description": "## 2.2 Read Categories  \nEndpoint: GET /categories\n\nAkses: Public (Semua User)\n\nDeskripsi: Menampilkan semua daftar kategori project."
+					},
+					"response": [
+						{
+							"name": "Read Categories Succes",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/categories",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"categories"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 10 Jan 2026 11:16:07 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"List Data Kategori\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Web Development\",\n            \"slug\": \"web-development\",\n            \"created_at\": \"2026-01-10T11:13:50.000000Z\",\n            \"updated_at\": \"2026-01-10T11:13:50.000000Z\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Read Categories Unauthenticated",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURLLaravel}}/api/categories",
+									"host": [
+										"{{baseURLLaravel}}"
+									],
+									"path": [
+										"api",
+										"categories"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 23:06:50 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthenticated.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Categories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvcmVnaXN0ZXIiLCJpYXQiOjE3NjgxNzkwMDYsImV4cCI6MTc2ODE4MjYwNiwibmJmIjoxNzY4MTc5MDA2LCJqdGkiOiJ0Ukh2dGZzZkJmSHBIajJ1Iiwic3ViIjoiNiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.iVLF5uFnaU-Xwt1WAbug--B8whRiY6JKP9UFY9e_abw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Fullstack Dev",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/categories/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"categories",
+								"2"
+							]
+						},
+						"description": "## 2.3 Update Categories  \nEndpoint: POST /categories/{id} (Menggunakan POST untuk support upload file jika ada)\n\nAkses: Admin Only\n\nBody:\n\nname: (string) Nama Baru"
+					},
+					"response": [
+						{
+							"name": "Update Categories Unauthenticated",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Fullstack Dev",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/categories/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"categories",
+										"1"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 02:18:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthenticated.\"\n}"
+						},
+						{
+							"name": "Update Categories as Admin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Fullstack Dev",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/categories/2",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"categories",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Jan 2026 00:45:54 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Kategori Berhasil Diupdate\",\n    \"data\": {\n        \"id\": 2,\n        \"name\": \"Fullstack Dev\",\n        \"slug\": \"fullstack-dev\",\n        \"created_at\": \"2026-01-11T23:03:31.000000Z\",\n        \"updated_at\": \"2026-01-12T00:45:54.000000Z\"\n    }\n}"
+						},
+						{
+							"name": "Update Categories as Mahasiswa Forbidden: Hanya Admin yang boleh edit kategori!",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Fullstack Dev",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/categories/2",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"categories",
+										"2"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Jan 2026 00:49:01 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 403,\n    \"message\": \"Forbidden: Hanya Admin yang boleh edit kategori!\",\n    \"data\": []\n}"
+						},
+						{
+							"name": "Update Categories as Client Forbidden: Hanya Admin yang boleh edit kategori!",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Fullstack Dev",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/categories/2",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"categories",
+										"2"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Jan 2026 00:50:27 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 403,\n    \"message\": \"Forbidden: Hanya Admin yang boleh edit kategori!\",\n    \"data\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Categories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgxNzkxNjYsImV4cCI6MTc2ODE4Mjc2NiwibmJmIjoxNzY4MTc5MTY2LCJqdGkiOiJ0UlVVNWNoczJKWThaU0x4Iiwic3ViIjoiNSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.JjHR0GMwao5zOa8pybH9NTk5Malcac5BhoXZDCViKp0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/categories/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"categories",
+								"2"
+							]
+						},
+						"description": "## 2.4 Delete Categories  \nEndpoint: DELETE /categories/{id}\n\nAkses: Admin Only"
+					},
+					"response": [
+						{
+							"name": "Delete Categories as Admin",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/categories/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"categories",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 23:13:05 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Kategori Berhasil Dihapus\",\n    \"data\": []\n}"
+						},
+						{
+							"name": "Delete Categories Unauthenticated",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/categories/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"categories",
+										"1"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Jan 2026 00:37:03 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthenticated.\"\n}"
+						},
+						{
+							"name": "Delete Categories as Client Forbidden: Hanya Admin yang boleh hapus kategori!",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/categories/2",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"categories",
+										"2"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Jan 2026 00:51:20 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 403,\n    \"message\": \"Forbidden: Hanya Admin yang boleh hapus kategori!\",\n    \"data\": []\n}"
+						},
+						{
+							"name": "Delete Categories as Mahasiswa Forbidden: Hanya Admin yang boleh hapus kategori!",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/categories/2",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"categories",
+										"2"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Jan 2026 00:53:03 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 403,\n    \"message\": \"Forbidden: Hanya Admin yang boleh hapus kategori!\",\n    \"data\": []\n}"
+						}
+					]
+				}
+			],
+			"description": "Hanya Admin yang memiliki akses penuh (Create/Update/Delete)."
+		},
+		{
+			"name": "Project CRUD",
+			"item": [
+				{
+					"name": "Create Project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgxNzk2NjcsImV4cCI6MTc2ODE4MzI2NywibmJmIjoxNzY4MTc5NjY3LCJqdGkiOiJNak5oR0ZiSTlzWEE1MmpUIiwic3ViIjoiNiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ._UsoVOIiQ4MFd5Spq3bq-eg5jDdYP7Grz0ObnEqAthw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Mayra",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "mayra@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "rahasia123",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "client",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "category_id",
+									"value": "2",
+									"description": "ID kategori yang sudah kamu buat sebelumnya",
+									"type": "text"
+								},
+								{
+									"key": "budget",
+									"value": "5000000",
+									"description": "Angka saja, jangan pakai \"Rp\" atau titik",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Website Toko Online",
+									"description": "Judul lowongan",
+									"type": "text"
+								},
+								{
+									"key": "deadline",
+									"value": "2026-02-01",
+									"description": "Format tanggal: Tahun-Bulan-Hari (YYYY-MM-DD)",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Dicari fullstack developer untuk membuat website profil perusahaan dengan 5 halaman utama dan fitur kontak form.",
+									"description": "Penjelasan detail",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/projects",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"projects"
+							]
+						},
+						"description": "## 3.1 Create Project  \nEndpoint: POST /projects\n\nAkses: Client Only\n\nBody:\n\ntitle: (string) Judul Project\n\ndescription: (string) Detail pekerjaan\n\nbudget: (number) Anggaran\n\ndeadline: (date: YYYY-MM-DD)\n\ncategory_id: (number) ID dari Kategori"
+					},
+					"response": [
+						{
+							"name": "Sekenario: Mahasiswa Create Project Forbidden: Hanya Client yang boleh membuat project!",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "category_id",
+											"value": "1",
+											"description": "ID kategori yang sudah kamu buat sebelumnya",
+											"type": "text"
+										},
+										{
+											"key": "title",
+											"value": "Butuh Web Company Profile",
+											"description": "Judul lowongan",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Dicari web developer untuk profil perusahaan 5 halaman.",
+											"description": "Penjelasan detail",
+											"type": "text"
+										},
+										{
+											"key": "budget",
+											"value": "5000000",
+											"description": "Angka saja, jangan pakai \"Rp\" atau titik",
+											"type": "text"
+										},
+										{
+											"key": "deadline",
+											"value": "2026-02-01",
+											"description": "Format tanggal: Tahun-Bulan-Hari (YYYY-MM-DD)",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/projects",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"projects"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 03:14:43 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 403,\n    \"message\": \"Forbidden: Hanya Client yang boleh membuat project!\",\n    \"data\": []\n}"
+						},
+						{
+							"name": "Skenario: Client Create Project Invalid",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Mayra",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": "mayra@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "rahasia123",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "client",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "category_id",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "budget",
+											"value": "5000000",
+											"type": "text"
+										},
+										{
+											"key": "title",
+											"value": "Website Toko Online",
+											"type": "text"
+										},
+										{
+											"key": "deadline",
+											"value": "2026-02-01",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/projects",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"projects"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 04:56:47 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 400,\n    \"message\": \"Validasi Gagal\",\n    \"data\": {\n        \"category_id\": [\n            \"The selected category id is invalid.\"\n        ],\n        \"description\": [\n            \"The description field is required.\"\n        ]\n    }\n}"
+						},
+						{
+							"name": "Skenario: Client Create Project Succes",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Mayra",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": "mayra@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "rahasia123",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "client",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "category_id",
+											"value": "2",
+											"description": "ID kategori yang sudah kamu buat sebelumnya",
+											"type": "text"
+										},
+										{
+											"key": "budget",
+											"value": "5000000",
+											"description": "Angka saja, jangan pakai \"Rp\" atau titik",
+											"type": "text"
+										},
+										{
+											"key": "title",
+											"value": "Website Toko Online",
+											"description": "Judul lowongan",
+											"type": "text"
+										},
+										{
+											"key": "deadline",
+											"value": "2026-02-01",
+											"description": "Format tanggal: Tahun-Bulan-Hari (YYYY-MM-DD)",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Dicari fullstack developer untuk membuat website profil perusahaan dengan 5 halaman utama dan fitur kontak form.",
+											"description": "Penjelasan detail",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/projects",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"projects"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Jan 2026 01:01:25 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 201,\n    \"message\": \"Project Berhasil Dibuat\",\n    \"data\": {\n        \"client_id\": 6,\n        \"category_id\": \"2\",\n        \"title\": \"Website Toko Online\",\n        \"description\": \"Dicari fullstack developer untuk membuat website profil perusahaan dengan 5 halaman utama dan fitur kontak form.\",\n        \"budget\": \"5000000\",\n        \"deadline\": \"2026-02-01\",\n        \"status\": \"open\",\n        \"updated_at\": \"2026-01-12T01:01:25.000000Z\",\n        \"created_at\": \"2026-01-12T01:01:25.000000Z\",\n        \"id\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Read Project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgxNzk2NjcsImV4cCI6MTc2ODE4MzI2NywibmJmIjoxNzY4MTc5NjY3LCJqdGkiOiJNak5oR0ZiSTlzWEE1MmpUIiwic3ViIjoiNiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ._UsoVOIiQ4MFd5Spq3bq-eg5jDdYP7Grz0ObnEqAthw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/projects",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"projects"
+							]
+						},
+						"description": "## 3.2 Read Project  \nEndpoint: GET /projects\n\nAkses: Public\n\nDeskripsi: Menampilkan list project beserta informasi Client pembuatnya."
+					},
+					"response": [
+						{
+							"name": "Read Project Succes",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/projects",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"projects"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Jan 2026 01:09:41 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"List Data Project\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"client_id\": 6,\n            \"category_id\": 2,\n            \"title\": \"Website Toko Online\",\n            \"description\": \"Dicari fullstack developer untuk membuat website profil perusahaan dengan 5 halaman utama dan fitur kontak form.\",\n            \"budget\": \"5000000.00\",\n            \"deadline\": \"2026-02-01\",\n            \"status\": \"open\",\n            \"created_at\": \"2026-01-12T01:01:25.000000Z\",\n            \"updated_at\": \"2026-01-12T01:01:25.000000Z\",\n            \"client\": {\n                \"id\": 6,\n                \"name\": \"Mayra\",\n                \"photo\": null\n            },\n            \"category\": {\n                \"id\": 2,\n                \"name\": \"Fullstack Dev\"\n            }\n        }\n    ]\n}"
+						},
+						{
+							"name": "Read Project Unauthenticated",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/projects",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"projects"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Jan 2026 01:11:12 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthenticated.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgxODQ5NzcsImV4cCI6MTc2ODE4ODU3NywibmJmIjoxNzY4MTg0OTc3LCJqdGkiOiJGSGtXWlJMOXBXSUJ4dGprIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.utiEV5ZmZPWslPyI8tZNsa1YqBPwW50zxYuZqF_8coU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Aplikasi Kasir Android (REVISI)",
+									"type": "text"
+								},
+								{
+									"key": "budget",
+									"value": "4000000",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Update: Budget saya naikkan jadi 4 juta.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/projects/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"projects",
+								"1"
+							]
+						},
+						"description": "## 3.3 Update Project  \nEndpoint: POST /projects/{id}\n\nAkses: Client (Pemilik Project)\n\nBody:\n\ntitle, description, budget (Sesuai kebutuhan update)"
+					},
+					"response": [
+						{
+							"name": "Update Project Succes",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/projects/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"projects",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Jan 2026 02:28:59 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Detail Project\",\n    \"data\": {\n        \"id\": 1,\n        \"client_id\": 6,\n        \"category_id\": 2,\n        \"title\": \"Website Toko Online\",\n        \"description\": \"Dicari fullstack developer untuk membuat website profil perusahaan dengan 5 halaman utama dan fitur kontak form.\",\n        \"budget\": \"5000000.00\",\n        \"deadline\": \"2026-02-01\",\n        \"status\": \"open\",\n        \"created_at\": \"2026-01-12T01:01:25.000000Z\",\n        \"updated_at\": \"2026-01-12T01:01:25.000000Z\",\n        \"client\": {\n            \"id\": 6,\n            \"name\": \"Mayra\",\n            \"email\": \"mayra@gmail.com\",\n            \"role\": \"client\",\n            \"photo\": null,\n            \"skills\": null,\n            \"phone\": null,\n            \"created_at\": \"2026-01-12T00:50:06.000000Z\",\n            \"updated_at\": \"2026-01-12T00:50:06.000000Z\"\n        },\n        \"category\": {\n            \"id\": 2,\n            \"name\": \"Fullstack Dev\",\n            \"slug\": \"fullstack-dev\",\n            \"created_at\": \"2026-01-11T23:03:31.000000Z\",\n            \"updated_at\": \"2026-01-12T00:45:54.000000Z\"\n        }\n    }\n}"
+						},
+						{
+							"name": "Update Project Forbidden: Anda bukan pemilik project ini!",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "title",
+											"value": "Aplikasi Kasir Android (REVISI)",
+											"type": "text"
+										},
+										{
+											"key": "budget",
+											"value": "4000000",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Update: Budget saya naikkan jadi 4 juta.",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/projects/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"projects",
+										"1"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Jan 2026 02:30:50 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 403,\n    \"message\": \"Forbidden: Anda bukan pemilik project ini!\",\n    \"data\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgxODQ5NzcsImV4cCI6MTc2ODE4ODU3NywibmJmIjoxNzY4MTg0OTc3LCJqdGkiOiJGSGtXWlJMOXBXSUJ4dGprIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.utiEV5ZmZPWslPyI8tZNsa1YqBPwW50zxYuZqF_8coU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/projects/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"projects",
+								"2"
+							]
+						},
+						"description": "3.4 Delete Project  \nEndpoint: DELETE /projects/{id}\n\nAkses: Client (Pemilik) atau Admin (Moderasi)"
+					},
+					"response": [
+						{
+							"name": "Delete Project Succes",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/projects/2",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"projects",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Jan 2026 02:34:34 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Project Berhasil Dihapus\",\n    \"data\": []\n}"
+						},
+						{
+							"name": "Delete Project Data not Found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/projects/2",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"projects",
+										"2"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Jan 2026 02:35:34 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 404,\n    \"message\": \"Data Project Tidak Ditemukan\",\n    \"data\": []\n}"
+						}
+					]
+				}
+			],
+			"description": "Manajemen lowongan pekerjaan oleh Client."
+		},
+		{
+			"name": "Bidding Resource",
+			"item": [
+				{
+					"name": "Melamar/Menawar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgxMTY2NjIsImV4cCI6MTc2ODEyMDI2MiwibmJmIjoxNzY4MTE2NjYyLCJqdGkiOiI2ZXpmakNDNGk1MTlNYjVmIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.MI9qh41XE4ZMfi-3aVIB0mUtmhhuoJMI6Anj4QF4wnU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "project_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "message",
+									"value": "Saya jago Laravel, bisa kerjain 3 hari selesai bang!",
+									"type": "text"
+								},
+								{
+									"key": "bid_amount",
+									"value": "5500000",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/apply-project",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"apply-project"
+							]
+						},
+						"description": "## 4.1 Melamar / Menawar  \nEndpoint: POST /apply-project\n\nAkses: Mahasiswa Only\n\nBody:\n\nproject_id: (number) ID Project yang dilamar\n\nmessage: (string) \"Saya ahli di bidang ini...\"\n\nbid_amount: (number) Harga tawaran mahasiswa"
+					},
+					"response": [
+						{
+							"name": "Melamar/menawar Succes",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "project_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "message",
+											"value": "Saya jago Laravel, bisa kerjain 3 hari selesai bang!",
+											"type": "text"
+										},
+										{
+											"key": "bid_amount",
+											"value": "5500000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/apply-project",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"apply-project"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 08:01:53 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 08:01:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.4"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 201,\n    \"message\": \"Berhasil Melamar Project\",\n    \"data\": {\n        \"project_id\": \"1\",\n        \"user_id\": 2,\n        \"message\": \"Saya jago Laravel, bisa kerjain 3 hari selesai bang!\",\n        \"bid_amount\": \"5500000\",\n        \"status\": \"pending\",\n        \"updated_at\": \"2026-01-11T08:01:53.000000Z\",\n        \"created_at\": \"2026-01-11T08:01:53.000000Z\",\n        \"id\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Client Cek Pelamar / Penawar (Mahasiswa)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgxMTcxNDQsImV4cCI6MTc2ODEyMDc0NCwibmJmIjoxNzY4MTE3MTQ0LCJqdGkiOiJsZE5RRTBHRmRmeWZrMktkIiwic3ViIjoiMyIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.Rkylfr7fUKg7Z5ktDwFAg9DJeJuBALDi_vs7fYc43S0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/project-applicants/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"project-applicants",
+								"1"
+							]
+						},
+						"description": "## 4.2 Client Cek Pelamar  \nEndpoint: GET /project-applicants/{projectId}\n\nAkses: Client (Pemilik Project)\n\nDeskripsi: Melihat siapa saja mahasiswa yang melamar di project tertentu."
+					},
+					"response": [
+						{
+							"name": "Client Cek Pelamar / Penawar (Mahasiswa) Succes",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/project-applicants/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"project-applicants",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 08:09:52 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 08:09:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.4"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"List Pelamar Project\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"project_id\": 1,\n            \"user_id\": 2,\n            \"message\": \"Saya jago Laravel, bisa kerjain 3 hari selesai bang!\",\n            \"bid_amount\": \"5500000.00\",\n            \"status\": \"pending\",\n            \"created_at\": \"2026-01-11T08:01:53.000000Z\",\n            \"updated_at\": \"2026-01-11T08:01:53.000000Z\",\n            \"user\": {\n                \"id\": 2,\n                \"name\": \"Mayra\",\n                \"email\": \"mayra@gmail.com\"\n            }\n        },\n        {\n            \"id\": 2,\n            \"project_id\": 1,\n            \"user_id\": 4,\n            \"message\": \"Saya jago Laravel, bisa kerjain 3 hari selesai bang!\",\n            \"bid_amount\": \"5100000.00\",\n            \"status\": \"pending\",\n            \"created_at\": \"2026-01-11T08:09:32.000000Z\",\n            \"updated_at\": \"2026-01-11T08:09:32.000000Z\",\n            \"user\": {\n                \"id\": 4,\n                \"name\": \"Davin\",\n                \"email\": \"davin@gmail.com\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Client Menerima Pelamar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgxMTcxNDQsImV4cCI6MTc2ODEyMDc0NCwibmJmIjoxNzY4MTE3MTQ0LCJqdGkiOiJsZE5RRTBHRmRmeWZrMktkIiwic3ViIjoiMyIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.Rkylfr7fUKg7Z5ktDwFAg9DJeJuBALDi_vs7fYc43S0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "status",
+									"value": "accepted",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/update-application/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"update-application",
+								"1"
+							]
+						},
+						"description": "4.3 Client Menerima Pelamar  \nEndpoint: POST /update-application/{id}\n\nAkses: Client\n\nDeskripsi: Mengubah status lamaran menjadi diterima/ditolak.\n\nBody:\n\nstatus: (string) accepted atau rejected"
+					},
+					"response": [
+						{
+							"name": "Client Menerima Pelamar Succes",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "status",
+											"value": "accepted",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/update-application/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"update-application",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 08:13:37 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 08:13:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.4"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Status lamaran berhasil diperbarui\",\n    \"data\": {\n        \"id\": 1,\n        \"project_id\": 1,\n        \"user_id\": 2,\n        \"message\": \"Saya jago Laravel, bisa kerjain 3 hari selesai bang!\",\n        \"bid_amount\": \"5500000.00\",\n        \"status\": \"accepted\",\n        \"created_at\": \"2026-01-11T08:01:53.000000Z\",\n        \"updated_at\": \"2026-01-11T08:13:37.000000Z\",\n        \"project\": {\n            \"id\": 1,\n            \"client_id\": 3,\n            \"category_id\": 1,\n            \"title\": \"Website Toko Online\",\n            \"description\": \"Dicari fullstack developer untuk membuat website profil perusahaan dengan 5 halaman utama dan fitur kontak form.\",\n            \"budget\": \"5000000.00\",\n            \"deadline\": \"2026-02-01\",\n            \"status\": \"open\",\n            \"created_at\": \"2026-01-11T08:00:39.000000Z\",\n            \"updated_at\": \"2026-01-11T08:00:39.000000Z\"\n        }\n    }\n}"
+						},
+						{
+							"name": "Client Menerima pelamar Forbidden: Anda tidak berhak mengatur lamaran ini",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "status",
+											"value": "accepted",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/update-application/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"update-application",
+										"1"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 08:19:40 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 08:19:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.4"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 403,\n    \"message\": \"Forbidden: Anda tidak berhak mengatur lamaran ini\",\n    \"data\": []\n}"
+						}
+					]
+				}
+			],
+			"description": "Interaksi antara Mahasiswa (Pelamar) dan Client (Pemberi Kerja)."
+		},
+		{
+			"name": "Review",
+			"item": [
+				{
+					"name": "Cek Review",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "## 5.1 Cek Review  \nEndpoint: GET /reviews/{userId}\n\nDeskripsi: Melihat reputasi/review milik user tertentu."
+					},
+					"response": [
+						{
+							"name": "CEK HASIL REVIEW",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/reviews/4",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"reviews",
+										"4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 09:21:32 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 09:21:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.4"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"List Review User\",\n    \"data\": [\n        {\n            \"id\": 3,\n            \"project_id\": 1,\n            \"reviewer_id\": 3,\n            \"reviewee_id\": 4,\n            \"rating\": 4,\n            \"comment\": \"hasil bagus tapi, mahasiswa kuramg tampan\",\n            \"created_at\": \"2026-01-11T09:16:35.000000Z\",\n            \"updated_at\": \"2026-01-11T09:16:35.000000Z\",\n            \"reviewer\": {\n                \"id\": 3,\n                \"name\": \"Afriza\"\n            },\n            \"project\": {\n                \"id\": 1,\n                \"title\": \"Website Toko Online\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Mahasiswa Review Client",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvcmVnaXN0ZXIiLCJpYXQiOjE3NjgxMTg4ODUsImV4cCI6MTc2ODEyMjQ4NSwibmJmIjoxNzY4MTE4ODg1LCJqdGkiOiJtRGprdGJhYW5EMXBNd3d1Iiwic3ViIjoiNCIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.GdbT5bIVRLGnhUwSvTM9sOZTon8bvqNFcejKj-Vw9ag",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "project_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "reviewee_id",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "rating",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "comment",
+									"value": "Client sangat ramah dan tampan",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/reviews",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"reviews"
+							]
+						},
+						"description": "## 5.2 Mahasiswa Review Client  \nEndpoint: POST /reviews\n\nAkses: Mahasiswa\n\nBody:\n\nproject_id: (number)\n\nreviewed_user_id: (number) ID Client yang direview\n\nrating: (1-5)\n\ncomment: (string)"
+					},
+					"response": [
+						{
+							"name": "Client Review",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "project_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "reviewee_id",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "rating",
+											"value": "5",
+											"type": "text"
+										},
+										{
+											"key": "comment",
+											"value": "Client sangat ramah dan tampan",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/reviews",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"reviews"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 08:51:20 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 08:51:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.4"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 201,\n    \"message\": \"Review Berhasil Dikirim\",\n    \"data\": {\n        \"project_id\": \"1\",\n        \"reviewer_id\": 4,\n        \"reviewee_id\": \"3\",\n        \"rating\": \"5\",\n        \"comment\": \"Client sangat ramah dan tampan\",\n        \"updated_at\": \"2026-01-11T08:51:20.000000Z\",\n        \"created_at\": \"2026-01-11T08:51:20.000000Z\",\n        \"id\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Client Review Mahasiswa",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgxMjEwNTIsImV4cCI6MTc2ODEyNDY1MiwibmJmIjoxNzY4MTIxMDUyLCJqdGkiOiJhZWFmb2w1UVo4NTR2Z0FQIiwic3ViIjoiMyIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.PHNZyGoo8FxmLnWTcLOw2k5jEtgAtNYxwG-jtodcHI0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "project_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "reviewee_id",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "rating",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "comment",
+									"value": "hasil bagus tapi, mahasiswa kuramg tampan",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/reviews",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"reviews"
+							]
+						},
+						"description": "## 5.3 Client Review Mahasiswa  \nEndpoint: POST /reviews\n\nAkses: Client\n\nBody:\n\nproject_id: (number)\n\nreviewed_user_id: (number) ID Mahasiswa yang direview\n\nrating: (1-5)\n\ncomment: (string)"
+					},
+					"response": [
+						{
+							"name": "Review mahasiswa berhasil",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "project_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "reviewee_id",
+											"value": "4",
+											"type": "text"
+										},
+										{
+											"key": "rating",
+											"value": "4",
+											"type": "text"
+										},
+										{
+											"key": "comment",
+											"value": "hasil bagus tapi, mahasiswa kuramg tampan",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/reviews",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"reviews"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 09:16:35 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 09:16:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.4"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 201,\n    \"message\": \"Review Berhasil Dikirim\",\n    \"data\": {\n        \"project_id\": \"1\",\n        \"reviewer_id\": 3,\n        \"reviewee_id\": \"4\",\n        \"rating\": \"4\",\n        \"comment\": \"hasil bagus tapi, mahasiswa kuramg tampan\",\n        \"updated_at\": \"2026-01-11T09:16:35.000000Z\",\n        \"created_at\": \"2026-01-11T09:16:35.000000Z\",\n        \"id\": 3\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Hapus Review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgxNDQ1MjcsImV4cCI6MTc2ODE0ODEyNywibmJmIjoxNzY4MTQ0NTI3LCJqdGkiOiJPcVdWRWtEcjh4ZmRqMHFYIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.VXldDS4EapW86TURXaDwhHD-U1rkccyEsugerjgdssg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "project_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "reviewee_id",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "rating",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "comment",
+									"value": "hasil bagus tapi, mahasiswa kuramg tampan",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/reviews/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"reviews",
+								"1"
+							]
+						},
+						"description": "## 5.4 Hapus Review  \nEndpoint: DELETE /reviews/{id}\n\nAkses: Admin Only (Moderasi komentar kasar/spam)"
+					},
+					"response": [
+						{
+							"name": "CLIENT COBA HAPUS REV MAHASISWA (forbidden)",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "project_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "reviewee_id",
+											"value": "4",
+											"type": "text"
+										},
+										{
+											"key": "rating",
+											"value": "4",
+											"type": "text"
+										},
+										{
+											"key": "comment",
+											"value": "hasil bagus tapi, mahasiswa kuramg tampan",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/reviews/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"reviews",
+										"1"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 15:12:45 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 15:12:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.4"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 403,\n    \"message\": \"Forbidden: Anda tidak berhak menghapus review ini\",\n    \"data\": []\n}"
+						},
+						{
+							"name": "REVIEW DIHAPUS ADMIN :(",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "project_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "reviewee_id",
+											"value": "4",
+											"type": "text"
+										},
+										{
+											"key": "rating",
+											"value": "4",
+											"type": "text"
+										},
+										{
+											"key": "comment",
+											"value": "hasil bagus tapi, mahasiswa kuramg tampan",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/reviews/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"reviews",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 15:16:07 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Jan 2026 15:16:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.4"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Review Berhasil Dihapus\",\n    \"data\": []\n}"
+						}
+					]
+				}
+			],
+			"description": "Sistem rating timbal balik setelah project selesai."
+		}
+	]
+}

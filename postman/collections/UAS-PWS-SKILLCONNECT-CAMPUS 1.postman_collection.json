@@ -1,0 +1,3100 @@
+{
+  "info": {
+    "_postman_id": "4a50ed87-2c64-48cf-b7f4-feb23a4690bd",
+    "name": "UAS-PWS-SKILLCONNECT-CAMPUS",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register",
+          "id": "ced1f698-ff6a-4257-9957-a8fdd7c66ff3",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "role",
+                  "value": "mahasiswa",
+                  "type": "text"
+                },
+                {
+                  "key": "name",
+                  "value": "davin",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "rahasia123",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "davin@gmail.com",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/auth/register",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f0dca683-e0f1-4242-9059-17e75f97ff96",
+              "name": "Register Succes",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "Davin",
+                      "type": "text"
+                    },
+                    {
+                      "key": "email",
+                      "value": "davinjulhan@skillconnect.com",
+                      "type": "text"
+                    },
+                    {
+                      "key": "password",
+                      "value": "rahasia123",
+                      "type": "text"
+                    },
+                    {
+                      "key": "role",
+                      "value": "mahasiswa",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/auth/register",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Host",
+                  "value": "127.0.0.1:8000"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "PHP/8.3.28"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 10 Jan 2026 09:41:01 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "58"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"code\": 201,\n    \"message\": \"Register Berhasil\",\n    \"data\": {\n        \"user\": {\n            \"name\": \"Davin\",\n            \"email\": \"davinjulhan@skillconnect.com\",\n            \"role\": \"mahasiswa\",\n            \"updated_at\": \"2026-01-10T09:41:00.000000Z\",\n            \"created_at\": \"2026-01-10T09:41:00.000000Z\",\n            \"id\": 2\n        },\n        \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvcmVnaXN0ZXIiLCJpYXQiOjE3NjgwMzgwNjEsImV4cCI6MTc2ODA0MTY2MSwibmJmIjoxNzY4MDM4MDYxLCJqdGkiOiJZWEtNT2VGQnU4SUhUZ0ZqIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.DldesaiqGzxn1yqPhxOCSYaQ6iwWLcPI2Y6-PDji2B0\"\n    }\n}"
+            },
+            {
+              "id": "9e92d4c4-9919-4253-b19b-8e67345725b1",
+              "name": "Email Taken",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "Davin",
+                      "type": "text"
+                    },
+                    {
+                      "key": "email",
+                      "value": "davin@gmail.com",
+                      "type": "text"
+                    },
+                    {
+                      "key": "password",
+                      "value": "rahasia123",
+                      "type": "text"
+                    },
+                    {
+                      "key": "role",
+                      "value": "mahasiswa",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/auth/register",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "Host",
+                  "value": "127.0.0.1:8000"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 11 Jan 2026 09:32:14 GMT"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 11 Jan 2026 09:32:14 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "PHP/8.2.4"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "59"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"code\": 400,\n    \"message\": \"Gagal Validasi\",\n    \"data\": {\n        \"email\": [\n            \"The email has already been taken.\"\n        ]\n    }\n}"
+            },
+            {
+              "id": "bd7396d4-191f-4e3a-a50c-2da3541e39cd",
+              "name": "Tes Admin",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "role",
+                      "value": "admin",
+                      "type": "text"
+                    },
+                    {
+                      "key": "name",
+                      "value": "afrijza",
+                      "type": "text"
+                    },
+                    {
+                      "key": "password",
+                      "value": "rahasia123",
+                      "type": "text"
+                    },
+                    {
+                      "key": "email",
+                      "value": "admin@gmail.com",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/auth/register",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "Host",
+                  "value": "127.0.0.1:8000"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 11 Jan 2026 14:00:38 GMT"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 11 Jan 2026 14:00:38 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "PHP/8.2.4"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "59"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"code\": 201,\n    \"message\": \"Register Berhasil\",\n    \"data\": {\n        \"user\": {\n            \"name\": \"afrijza\",\n            \"email\": \"admin@gmail.com\",\n            \"role\": \"admin\",\n            \"updated_at\": \"2026-01-11T14:00:38.000000Z\",\n            \"created_at\": \"2026-01-11T14:00:38.000000Z\",\n            \"id\": 1\n        },\n        \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvcmVnaXN0ZXIiLCJpYXQiOjE3NjgxNDAwMzgsImV4cCI6MTc2ODE0MzYzOCwibmJmIjoxNzY4MTQwMDM4LCJqdGkiOiJQMGpYcUQzVWs3ZFMzWnN1Iiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.TZiqKWYKRIowBbUTLP8PRkTi1sJKkS1eaCjQKJqxcVo\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Register Copy",
+          "id": "b8b841bd-8a92-42ee-a9b9-9dd7b0801c20",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Afriza",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "afriza@gmail.com",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "rahasia123",
+                  "type": "text"
+                },
+                {
+                  "key": "role",
+                  "value": "client",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/auth/register",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "31965be5-ae39-4ec0-99f6-7d2d7670c36d",
+              "name": "Register Succes",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "Davin",
+                      "type": "text"
+                    },
+                    {
+                      "key": "email",
+                      "value": "davinjulhan@skillconnect.com",
+                      "type": "text"
+                    },
+                    {
+                      "key": "password",
+                      "value": "rahasia123",
+                      "type": "text"
+                    },
+                    {
+                      "key": "role",
+                      "value": "mahasiswa",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/auth/register",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Host",
+                  "value": "127.0.0.1:8000"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "PHP/8.3.28"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 10 Jan 2026 09:41:01 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "58"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"code\": 201,\n    \"message\": \"Register Berhasil\",\n    \"data\": {\n        \"user\": {\n            \"name\": \"Davin\",\n            \"email\": \"davinjulhan@skillconnect.com\",\n            \"role\": \"mahasiswa\",\n            \"updated_at\": \"2026-01-10T09:41:00.000000Z\",\n            \"created_at\": \"2026-01-10T09:41:00.000000Z\",\n            \"id\": 2\n        },\n        \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvcmVnaXN0ZXIiLCJpYXQiOjE3NjgwMzgwNjEsImV4cCI6MTc2ODA0MTY2MSwibmJmIjoxNzY4MDM4MDYxLCJqdGkiOiJZWEtNT2VGQnU4SUhUZ0ZqIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.DldesaiqGzxn1yqPhxOCSYaQ6iwWLcPI2Y6-PDji2B0\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Login",
+          "id": "ea544db7-2fa6-4fa5-a8ff-c2acdfc3e42a",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvcmVnaXN0ZXIiLCJpYXQiOjE3NjgxNDEzNjcsImV4cCI6MTc2ODE0NDk2NywibmJmIjoxNzY4MTQxMzY3LCJqdGkiOiJIdFgzQ21mTzV1T2RPN2FxIiwic3ViIjoiMyIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.P5XReWquYm-qd3x6pZ1EU-zM6d-klb3jtD6BMhginOQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "email",
+                  "value": "admin@gmail.com",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "rahasia123",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "76db81d7-f7f3-4249-83d3-4a6befd9c81a",
+              "name": "Login Succes",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "email",
+                      "value": "davin@skillconnect.com",
+                      "type": "text"
+                    },
+                    {
+                      "key": "password",
+                      "value": "rahasia123",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/auth/login",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Host",
+                  "value": "127.0.0.1:8000"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "PHP/8.3.28"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 10 Jan 2026 09:49:05 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "59"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"headers\": {},\n    \"original\": {\n        \"code\": 200,\n        \"message\": \"Login successful\",\n        \"data\": {\n            \"type\": \"Bearer\",\n            \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgwMzg1NDUsImV4cCI6MTc2ODA0MjE0NSwibmJmIjoxNzY4MDM4NTQ1LCJqdGkiOiJWOWdremFiR2JtUHRLTTdQIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.TJfLyCP0vHUY1xyGxGKUFRlQCyfXT1f9XBus4kEf_QU\",\n            \"expires\": \"2026-01-10 10:49:05\"\n        }\n    },\n    \"exception\": null\n}"
+            }
+          ]
+        },
+        {
+          "name": "Login Copy",
+          "id": "8ae969bb-045c-4aff-8c01-3943e15a83ca",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "email",
+                  "value": "afriza@gmail.com",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "rahasia123",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "19ecd6d8-94cf-479d-958c-619373bffc72",
+              "name": "Login Succes",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "email",
+                      "value": "davin@skillconnect.com",
+                      "type": "text"
+                    },
+                    {
+                      "key": "password",
+                      "value": "rahasia123",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/auth/login",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Host",
+                  "value": "127.0.0.1:8000"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "PHP/8.3.28"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 10 Jan 2026 09:49:05 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "59"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"headers\": {},\n    \"original\": {\n        \"code\": 200,\n        \"message\": \"Login successful\",\n        \"data\": {\n            \"type\": \"Bearer\",\n            \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgwMzg1NDUsImV4cCI6MTc2ODA0MjE0NSwibmJmIjoxNzY4MDM4NTQ1LCJqdGkiOiJWOWdremFiR2JtUHRLTTdQIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.TJfLyCP0vHUY1xyGxGKUFRlQCyfXT1f9XBus4kEf_QU\",\n            \"expires\": \"2026-01-10 10:49:05\"\n        }\n    },\n    \"exception\": null\n}"
+            }
+          ]
+        },
+        {
+          "name": "Login Check Succes",
+          "id": "40194ee6-6a38-4caf-aeb2-4a52be068edc",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgxMjEwNTIsImV4cCI6MTc2ODEyNDY1MiwibmJmIjoxNzY4MTIxMDUyLCJqdGkiOiJhZWFmb2w1UVo4NTR2Z0FQIiwic3ViIjoiMyIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.PHNZyGoo8FxmLnWTcLOw2k5jEtgAtNYxwG-jtodcHI0",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/auth/me",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5ee93fce-c804-4663-89fd-833bb8bd625e",
+              "name": "Login CHeck Succes",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/auth/me",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "me"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Host",
+                  "value": "127.0.0.1:8000"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "PHP/8.3.28"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 10 Jan 2026 09:50:45 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "59"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"headers\": {},\n    \"original\": {\n        \"code\": 200,\n        \"message\": \"Logged in User\",\n        \"data\": {\n            \"name\": \"Kirimao\",\n            \"email\": \"davin@skillconnect.com\",\n            \"exp\": \"2026-01-10 10:49:05\"\n        }\n    },\n    \"exception\": null\n}"
+            }
+          ]
+        },
+        {
+          "name": "Logout Succes",
+          "id": "2f1f9017-7cdb-4ca6-932e-dc472d012d3b",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgxMjQwMTksImV4cCI6MTc2ODEyNzYxOSwibmJmIjoxNzY4MTI0MDE5LCJqdGkiOiJOa0hlcWtoc2huT1BEQTRDIiwic3ViIjoiNCIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.YvRkBnzZKIV4t2y9djsrS_-rj3oi7AkaY6hhzTy2gg4",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": []
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/auth/logout",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "auth",
+                "logout"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d81ed9eb-cf08-480d-b55b-a1767c2200a5",
+              "name": "Logout Succes",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/auth/logout",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "logout"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Host",
+                  "value": "127.0.0.1:8000"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "PHP/8.3.28"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 10 Jan 2026 09:52:18 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "59"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"headers\": {},\n    \"original\": {\n        \"code\": 200,\n        \"message\": \"Successfully logged out\",\n        \"data\": []\n    },\n    \"exception\": null\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Profile",
+          "id": "7531c34d-1600-4447-a038-a29caa1166fe",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgwMzk0MzcsImV4cCI6MTc2ODA0MzAzNywibmJmIjoxNzY4MDM5NDM3LCJqdGkiOiJscFdQdDFHaDh6QTQ4Yzg5Iiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.88W3S9LaKe5rk_7bHWIXl6PFcBZdBrZKA9u4gu7BY1k",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Kirimainan",
+                  "type": "text"
+                },
+                {
+                  "key": "photo",
+                  "type": "file",
+                  "src": [
+                    "/C:/Users/User/Downloads/smartlamp 2 lamp.png"
+                  ]
+                },
+                {
+                  "key": "email",
+                  "value": "davin@skillconnect.com",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURLLaravel}}/api/auth/update-profile",
+              "host": [
+                "{{baseURLLaravel}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "update-profile"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e3a9c8f0-545a-4ca2-b8b6-d64a876b2afa",
+              "name": "Update Profile Succes",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "Kirimainan",
+                      "type": "text"
+                    },
+                    {
+                      "key": "photo",
+                      "type": "file",
+                      "src": [
+                        "/C:/Users/User/Downloads/smartlamp 2 lamp.png"
+                      ]
+                    },
+                    {
+                      "key": "email",
+                      "value": "davin@skillconnect.com",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/auth/update-profile",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "update-profile"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Host",
+                  "value": "127.0.0.1:8000"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "PHP/8.3.28"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 10 Jan 2026 10:04:12 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "59"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"code\": 200,\n    \"message\": \"Profile Berhasil Diupdate\",\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Kirimainan\",\n        \"email\": \"davin@skillconnect.com\",\n        \"role\": \"mahasiswa\",\n        \"photo\": \"photos/yWqLaB3UOHZffXFZmCOHBPDPGiPJO1RP80wLlKid.png\",\n        \"skills\": null,\n        \"phone\": null,\n        \"created_at\": \"2026-01-09T15:49:06.000000Z\",\n        \"updated_at\": \"2026-01-10T10:04:12.000000Z\"\n    }\n}"
+            }
+          ]
+        }
+      ],
+      "id": "b78d7627-8142-4140-a317-d45d5b053452"
+    },
+    {
+      "name": "Categories CRUD",
+      "item": [
+        {
+          "name": "Create Categories",
+          "id": "5f96ac9d-f4ce-4059-9364-18314eef63c7",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvcmVnaXN0ZXIiLCJpYXQiOjE3NjgxNDAwMzgsImV4cCI6MTc2ODE0MzYzOCwibmJmIjoxNzY4MTQwMDM4LCJqdGkiOiJQMGpYcUQzVWs3ZFMzWnN1Iiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.TZiqKWYKRIowBbUTLP8PRkTi1sJKkS1eaCjQKJqxcVo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "name",
+                  "value": "Web Development",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/categories",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Read Categories",
+          "id": "bc31f4c2-c42c-4402-bd4a-fe0d0ce4976d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgwNDIxODUsImV4cCI6MTc2ODA0NTc4NSwibmJmIjoxNzY4MDQyMTg1LCJqdGkiOiJiY2RDcTFuZGZxSzJ5OFgwIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.MV18ut8dc40GYFFHWk8n8itrshxSn7Ez3S0pVTmCvZ4",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "name",
+                  "value": "Web Development",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURLLaravel}}/api/categories",
+              "host": [
+                "{{baseURLLaravel}}"
+              ],
+              "path": [
+                "api",
+                "categories"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "73463b6f-ce57-43cb-b6d8-e8e6604d4374",
+              "name": "Read Categories Succes",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/categories",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "categories"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "Host",
+                  "value": "127.0.0.1:8000"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "PHP/8.2.12"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 10 Jan 2026 11:16:07 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "58"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"code\": 200,\n    \"message\": \"List Data Kategori\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Web Development\",\n            \"slug\": \"web-development\",\n            \"created_at\": \"2026-01-10T11:13:50.000000Z\",\n            \"updated_at\": \"2026-01-10T11:13:50.000000Z\"\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Categories",
+          "id": "fd5d1a36-70aa-4ddf-8383-418c209edb7f",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgwOTgwMTMsImV4cCI6MTc2ODEwMTYxMywibmJmIjoxNzY4MDk4MDEzLCJqdGkiOiJnQ0c5Q0pnd3JXYkU0VGlQIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.DDeaEKOCX4RxfAO0VK2_2BRko1V1Nx3lHA4m7ES7wEQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "name",
+                  "value": "Fullstack Dev",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/categories/1",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "categories",
+                "1"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4144b23b-2bec-4bb2-94aa-f24f4e63d7aa",
+              "name": "Update Categories Unauthenticated",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "name",
+                      "value": "Fullstack Dev",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/categories/1",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "categories",
+                    "1"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "Host",
+                  "value": "127.0.0.1:8000"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "PHP/8.2.12"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 11 Jan 2026 02:18:32 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Unauthenticated.\"\n}"
+            },
+            {
+              "id": "a49861b1-b703-447f-8889-b4ae49333053",
+              "name": "Update Categories succes",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "name",
+                      "value": "Fullstack Dev",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/categories/1",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "categories",
+                    "1"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "Host",
+                  "value": "127.0.0.1:8000"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "PHP/8.2.12"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 11 Jan 2026 02:20:35 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "59"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"code\": 200,\n    \"message\": \"Kategori Berhasil Diupdate\",\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Fullstack Dev\",\n        \"slug\": \"fullstack-dev\",\n        \"created_at\": \"2026-01-10T11:13:50.000000Z\",\n        \"updated_at\": \"2026-01-11T02:20:35.000000Z\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Delete Categories",
+          "id": "88adbb3e-14f9-4c4f-817a-7b781270ed22",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgwOTgwMTMsImV4cCI6MTc2ODEwMTYxMywibmJmIjoxNzY4MDk4MDEzLCJqdGkiOiJnQ0c5Q0pnd3JXYkU0VGlQIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.DDeaEKOCX4RxfAO0VK2_2BRko1V1Nx3lHA4m7ES7wEQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/categories/1",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "categories",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "4bd25574-a624-487f-be09-0bddea6d3e8e"
+    },
+    {
+      "name": "Project CRUD",
+      "item": [
+        {
+          "name": "Skenario: Mahasiswa Coba Bikin Project",
+          "id": "d3bd15fc-2e8a-4fc1-985f-44c1007312d7",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgwOTgwMTMsImV4cCI6MTc2ODEwMTYxMywibmJmIjoxNzY4MDk4MDEzLCJqdGkiOiJnQ0c5Q0pnd3JXYkU0VGlQIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.DDeaEKOCX4RxfAO0VK2_2BRko1V1Nx3lHA4m7ES7wEQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "category_id",
+                  "value": "1",
+                  "description": "ID kategori yang sudah kamu buat sebelumnya",
+                  "type": "text"
+                },
+                {
+                  "key": "title",
+                  "value": "Butuh Web Company Profile",
+                  "description": "Judul lowongan",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "Dicari web developer untuk profil perusahaan 5 halaman.",
+                  "description": "Penjelasan detail",
+                  "type": "text"
+                },
+                {
+                  "key": "budget",
+                  "value": "5000000",
+                  "description": "Angka saja, jangan pakai \"Rp\" atau titik",
+                  "type": "text"
+                },
+                {
+                  "key": "deadline",
+                  "value": "2026-02-01",
+                  "description": "Format tanggal: Tahun-Bulan-Hari (YYYY-MM-DD)",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/projects",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "projects"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "867d8b55-322e-4a2f-8b76-815a952f47d1",
+              "name": "Skenario: Mahasiswa Coba Bikin Project Forbidden: Hanya Client yang boleh membuat project!",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "category_id",
+                      "value": "1",
+                      "description": "ID kategori yang sudah kamu buat sebelumnya",
+                      "type": "text"
+                    },
+                    {
+                      "key": "title",
+                      "value": "Butuh Web Company Profile",
+                      "description": "Judul lowongan",
+                      "type": "text"
+                    },
+                    {
+                      "key": "description",
+                      "value": "Dicari web developer untuk profil perusahaan 5 halaman.",
+                      "description": "Penjelasan detail",
+                      "type": "text"
+                    },
+                    {
+                      "key": "budget",
+                      "value": "5000000",
+                      "description": "Angka saja, jangan pakai \"Rp\" atau titik",
+                      "type": "text"
+                    },
+                    {
+                      "key": "deadline",
+                      "value": "2026-02-01",
+                      "description": "Format tanggal: Tahun-Bulan-Hari (YYYY-MM-DD)",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/projects",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "projects"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "Host",
+                  "value": "127.0.0.1:8000"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "PHP/8.2.12"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 11 Jan 2026 03:14:43 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "59"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"code\": 403,\n    \"message\": \"Forbidden: Hanya Client yang boleh membuat project!\",\n    \"data\": []\n}"
+            }
+          ]
+        },
+        {
+          "name": "Skenario: Client Coba Bikin Project Copy",
+          "id": "3fc5fc45-7fa5-46cd-a4ca-293843014c85",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgxMTcxNDQsImV4cCI6MTc2ODEyMDc0NCwibmJmIjoxNzY4MTE3MTQ0LCJqdGkiOiJsZE5RRTBHRmRmeWZrMktkIiwic3ViIjoiMyIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.Rkylfr7fUKg7Z5ktDwFAg9DJeJuBALDi_vs7fYc43S0",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "name",
+                  "value": "Mayra",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "email",
+                  "value": "afriza@gmail.com",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "rahasia123",
+                  "type": "text"
+                },
+                {
+                  "key": "role",
+                  "value": "client",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "category_id",
+                  "value": "1",
+                  "description": "ID kategori yang sudah kamu buat sebelumnya",
+                  "type": "text"
+                },
+                {
+                  "key": "budget",
+                  "value": "5000000",
+                  "description": "Angka saja, jangan pakai \"Rp\" atau titik",
+                  "type": "text"
+                },
+                {
+                  "key": "title",
+                  "value": "Website Toko Online",
+                  "description": "Judul lowongan",
+                  "type": "text"
+                },
+                {
+                  "key": "deadline",
+                  "value": "2026-02-01",
+                  "description": "Format tanggal: Tahun-Bulan-Hari (YYYY-MM-DD)",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "Dicari fullstack developer untuk membuat website profil perusahaan dengan 5 halaman utama dan fitur kontak form.",
+                  "description": "Penjelasan detail",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/projects",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "projects"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "85b95bdb-e0c7-476a-a452-c240561a94ae",
+              "name": "Skenario: Mahasiswa Coba Bikin Project Forbidden: Hanya Client yang boleh membuat project!",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "category_id",
+                      "value": "1",
+                      "description": "ID kategori yang sudah kamu buat sebelumnya",
+                      "type": "text"
+                    },
+                    {
+                      "key": "title",
+                      "value": "Butuh Web Company Profile",
+                      "description": "Judul lowongan",
+                      "type": "text"
+                    },
+                    {
+                      "key": "description",
+                      "value": "Dicari web developer untuk profil perusahaan 5 halaman.",
+                      "description": "Penjelasan detail",
+                      "type": "text"
+                    },
+                    {
+                      "key": "budget",
+                      "value": "5000000",
+                      "description": "Angka saja, jangan pakai \"Rp\" atau titik",
+                      "type": "text"
+                    },
+                    {
+                      "key": "deadline",
+                      "value": "2026-02-01",
+                      "description": "Format tanggal: Tahun-Bulan-Hari (YYYY-MM-DD)",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/projects",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "projects"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "Host",
+                  "value": "127.0.0.1:8000"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "PHP/8.2.12"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 11 Jan 2026 03:14:43 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "59"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"code\": 403,\n    \"message\": \"Forbidden: Hanya Client yang boleh membuat project!\",\n    \"data\": []\n}"
+            },
+            {
+              "id": "6f4d07ad-2055-4de0-954a-1443e160c757",
+              "name": "Skenario: Client Coba Bikin Project Invalid",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "name",
+                      "value": "Mayra",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "email",
+                      "value": "mayra@gmail.com",
+                      "type": "text"
+                    },
+                    {
+                      "key": "password",
+                      "value": "rahasia123",
+                      "type": "text"
+                    },
+                    {
+                      "key": "role",
+                      "value": "client",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "category_id",
+                      "value": "2",
+                      "type": "text"
+                    },
+                    {
+                      "key": "budget",
+                      "value": "5000000",
+                      "type": "text"
+                    },
+                    {
+                      "key": "title",
+                      "value": "Website Toko Online",
+                      "type": "text"
+                    },
+                    {
+                      "key": "deadline",
+                      "value": "2026-02-01",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/projects",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "projects"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "Host",
+                  "value": "127.0.0.1:8000"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "PHP/8.2.12"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 11 Jan 2026 04:56:47 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "60"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "59"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"code\": 400,\n    \"message\": \"Validasi Gagal\",\n    \"data\": {\n        \"category_id\": [\n            \"The selected category id is invalid.\"\n        ],\n        \"description\": [\n            \"The description field is required.\"\n        ]\n    }\n}"
+            }
+          ]
+        }
+      ],
+      "id": "eed0d0af-7774-4c26-a9ae-932610e91e4a"
+    },
+    {
+      "name": "CLIENT CARI JASA",
+      "id": "3e521385-5c76-4989-8096-ba89380cb3ce",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgxNDA2NDAsImV4cCI6MTc2ODE0NDI0MCwibmJmIjoxNzY4MTQwNjQwLCJqdGkiOiJOakVkVmk5OHd2QjloTGRzIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.E9maqSGAtfMR_8qciz_M8fcynK-Ekl2McI9H_iwUC-w",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "title",
+              "value": "jasa bikin web",
+              "description": "buatkan sy web company",
+              "type": "text"
+            },
+            {
+              "key": "budget",
+              "value": "5000000",
+              "description": "lumayan",
+              "type": "text"
+            },
+            {
+              "key": "category_id",
+              "value": "2",
+              "description": "id",
+              "type": "text"
+            },
+            {
+              "key": "description",
+              "value": "Dicari fullstack developer untuk membuat website profil perusahaan dengan 5 halaman utama dan fitur kontak form.",
+              "description": "Dicari fullstack developer untuk membuat website profil perusahaan dengan 5 halaman utama dan fitur kontak form.",
+              "type": "text"
+            },
+            {
+              "key": "deadline",
+              "value": "2026-02-01",
+              "description": "tengat",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/projects",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "projects"
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "729deb96-55a6-476b-adce-f0315a212cf8",
+          "name": "BERHASIL",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "title",
+                  "value": "jasa bikin web",
+                  "description": "buatkan sy web company",
+                  "type": "text"
+                },
+                {
+                  "key": "budget",
+                  "value": "5000000",
+                  "description": "lumayan",
+                  "type": "text"
+                },
+                {
+                  "key": "category_id",
+                  "value": "2",
+                  "description": "id",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "Dicari fullstack developer untuk membuat website profil perusahaan dengan 5 halaman utama dan fitur kontak form.",
+                  "description": "Dicari fullstack developer untuk membuat website profil perusahaan dengan 5 halaman utama dan fitur kontak form.",
+                  "type": "text"
+                },
+                {
+                  "key": "deadline",
+                  "value": "2026-02-01",
+                  "description": "tengat",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/projects",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "projects"
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "Text",
+          "header": [
+            {
+              "key": "Host",
+              "value": "127.0.0.1:8000"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 11 Jan 2026 14:20:22 GMT"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 11 Jan 2026 14:20:22 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "PHP/8.2.4"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, private"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-RateLimit-Limit",
+              "value": "60"
+            },
+            {
+              "key": "X-RateLimit-Remaining",
+              "value": "59"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"code\": 201,\n    \"message\": \"Project Berhasil Dibuat\",\n    \"data\": {\n        \"client_id\": 2,\n        \"category_id\": \"2\",\n        \"title\": \"jasa bikin web\",\n        \"description\": \"Dicari fullstack developer untuk membuat website profil perusahaan dengan 5 halaman utama dan fitur kontak form.\",\n        \"budget\": \"5000000\",\n        \"deadline\": \"2026-02-01\",\n        \"status\": \"open\",\n        \"updated_at\": \"2026-01-11T14:20:22.000000Z\",\n        \"created_at\": \"2026-01-11T14:20:22.000000Z\",\n        \"id\": 1\n    }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Review dari client",
+      "id": "6f8e2c1b-9d26-4346-b9dc-1bbee8fd2f3c",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvcmVnaXN0ZXIiLCJpYXQiOjE3NjgxNDEzNjcsImV4cCI6MTc2ODE0NDk2NywibmJmIjoxNzY4MTQxMzY3LCJqdGkiOiJIdFgzQ21mTzV1T2RPN2FxIiwic3ViIjoiMyIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.P5XReWquYm-qd3x6pZ1EU-zM6d-klb3jtD6BMhginOQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "project_id",
+              "value": "1",
+              "type": "text"
+            },
+            {
+              "key": "reviewee_id",
+              "value": "3",
+              "type": "text"
+            },
+            {
+              "key": "rating",
+              "value": "4",
+              "type": "text"
+            },
+            {
+              "key": "comment",
+              "value": "hasil bagus tapi, mahasiswa kuramg tampan",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/reviews",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "reviews"
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "64b2ee71-0701-4f56-94bc-166541e6dc23",
+          "name": "Review dari client berhasil",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "project_id",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "reviewee_id",
+                  "value": "4",
+                  "type": "text"
+                },
+                {
+                  "key": "rating",
+                  "value": "4",
+                  "type": "text"
+                },
+                {
+                  "key": "comment",
+                  "value": "hasil bagus tapi, mahasiswa kuramg tampan",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/reviews",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "reviews"
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "Text",
+          "header": [
+            {
+              "key": "Host",
+              "value": "127.0.0.1:8000"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 11 Jan 2026 09:16:35 GMT"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 11 Jan 2026 09:16:35 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "PHP/8.2.4"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, private"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-RateLimit-Limit",
+              "value": "60"
+            },
+            {
+              "key": "X-RateLimit-Remaining",
+              "value": "59"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"code\": 201,\n    \"message\": \"Review Berhasil Dikirim\",\n    \"data\": {\n        \"project_id\": \"1\",\n        \"reviewer_id\": 3,\n        \"reviewee_id\": \"4\",\n        \"rating\": \"4\",\n        \"comment\": \"hasil bagus tapi, mahasiswa kuramg tampan\",\n        \"updated_at\": \"2026-01-11T09:16:35.000000Z\",\n        \"created_at\": \"2026-01-11T09:16:35.000000Z\",\n        \"id\": 3\n    }\n}"
+        }
+      ]
+    },
+    {
+      "name": "CEK REVIEW",
+      "id": "3a2ba90f-37de-4089-a202-113fc23cdbd8",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgxMjEwNTIsImV4cCI6MTc2ODEyNDY1MiwibmJmIjoxNzY4MTIxMDUyLCJqdGkiOiJhZWFmb2w1UVo4NTR2Z0FQIiwic3ViIjoiMyIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.PHNZyGoo8FxmLnWTcLOw2k5jEtgAtNYxwG-jtodcHI0",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": []
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/reviews/4",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "reviews",
+            "4"
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "cdf2d520-d098-48a5-a79b-3674113a8388",
+          "name": "CEK HASIL REVIEW",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/reviews/4",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "reviews",
+                "4"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "Text",
+          "header": [
+            {
+              "key": "Host",
+              "value": "127.0.0.1:8000"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 11 Jan 2026 09:21:32 GMT"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 11 Jan 2026 09:21:32 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "PHP/8.2.4"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, private"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-RateLimit-Limit",
+              "value": "60"
+            },
+            {
+              "key": "X-RateLimit-Remaining",
+              "value": "59"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"code\": 200,\n    \"message\": \"List Review User\",\n    \"data\": [\n        {\n            \"id\": 3,\n            \"project_id\": 1,\n            \"reviewer_id\": 3,\n            \"reviewee_id\": 4,\n            \"rating\": 4,\n            \"comment\": \"hasil bagus tapi, mahasiswa kuramg tampan\",\n            \"created_at\": \"2026-01-11T09:16:35.000000Z\",\n            \"updated_at\": \"2026-01-11T09:16:35.000000Z\",\n            \"reviewer\": {\n                \"id\": 3,\n                \"name\": \"Afriza\"\n            },\n            \"project\": {\n                \"id\": 1,\n                \"title\": \"Website Toko Online\"\n            }\n        }\n    ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "TES REVIEW 2X",
+      "id": "793d1943-4366-4a36-a4db-9dba234c75d3",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgxMjQwMTksImV4cCI6MTc2ODEyNzYxOSwibmJmIjoxNzY4MTI0MDE5LCJqdGkiOiJOa0hlcWtoc2huT1BEQTRDIiwic3ViIjoiNCIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.YvRkBnzZKIV4t2y9djsrS_-rj3oi7AkaY6hhzTy2gg4",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "project_id",
+              "value": "1",
+              "type": "text"
+            },
+            {
+              "key": "reviewee_id",
+              "value": "3",
+              "type": "text"
+            },
+            {
+              "key": "rating",
+              "value": "5",
+              "type": "text"
+            },
+            {
+              "key": "comment",
+              "value": "client sangat ramah dan tampan",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/reviews/",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "reviews",
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "9e4dc5b2-955e-4fd6-939b-da3ec1a3b780",
+          "name": "SUDAH REVIEW (TIDAK BISA 2x)",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "project_id",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "reviewee_id",
+                  "value": "3",
+                  "type": "text"
+                },
+                {
+                  "key": "rating",
+                  "value": "5",
+                  "type": "text"
+                },
+                {
+                  "key": "comment",
+                  "value": "client sangat ramah dan tampan",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/reviews/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "reviews",
+                ""
+              ]
+            }
+          },
+          "status": "Conflict",
+          "code": 409,
+          "_postman_previewlanguage": "Text",
+          "header": [
+            {
+              "key": "Host",
+              "value": "127.0.0.1:8000"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 11 Jan 2026 09:35:46 GMT"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 11 Jan 2026 09:35:46 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "PHP/8.2.4"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, private"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-RateLimit-Limit",
+              "value": "60"
+            },
+            {
+              "key": "X-RateLimit-Remaining",
+              "value": "59"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"code\": 409,\n    \"message\": \"Anda sudah memberikan review untuk user ini di project ini!\",\n    \"data\": []\n}"
+        }
+      ]
+    },
+    {
+      "name": "CEK AKTIVITAS",
+      "id": "d1e85606-6db5-46e7-9fdf-a23b7c935fd7",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgxNDQ1MjcsImV4cCI6MTc2ODE0ODEyNywibmJmIjoxNzY4MTQ0NTI3LCJqdGkiOiJPcVdWRWtEcjh4ZmRqMHFYIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.VXldDS4EapW86TURXaDwhHD-U1rkccyEsugerjgdssg",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": []
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/activity-logs",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "activity-logs"
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "70e04ed5-363d-4ff4-9210-20cd01e22a1c",
+          "name": "CEK AKTIVITAS SUKSES",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/activity-logs",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "activity-logs"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "Text",
+          "header": [
+            {
+              "key": "Host",
+              "value": "127.0.0.1:8000"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 11 Jan 2026 14:35:57 GMT"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 11 Jan 2026 14:35:57 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "PHP/8.2.4"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, private"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-RateLimit-Limit",
+              "value": "60"
+            },
+            {
+              "key": "X-RateLimit-Remaining",
+              "value": "59"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"code\": 200,\n    \"message\": \"Riwayat Aktivitas User\",\n    \"data\": [\n        {\n            \"id\": 6,\n            \"user_id\": 3,\n            \"action\": \"LOGIN\",\n            \"description\": \"User (Role: mahasiswa) berhasil login.\",\n            \"created_at\": \"2026-01-11T14:28:26.000000Z\",\n            \"updated_at\": \"2026-01-11T14:28:26.000000Z\"\n        },\n        {\n            \"id\": 5,\n            \"user_id\": 3,\n            \"action\": \"APPLY_PROJECT\",\n            \"description\": \"Melamar project ID: 1 (Bid: 4500000)\",\n            \"created_at\": \"2026-01-11T14:26:13.000000Z\",\n            \"updated_at\": \"2026-01-11T14:26:13.000000Z\"\n        }\n    ]\n}"
+        },
+        {
+          "id": "5e1987a8-6d04-4d02-925b-168ad909c796",
+          "name": "UPDATE APPLICATION BERHASIL",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/activity-logs",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "activity-logs"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "Text",
+          "header": [
+            {
+              "key": "Host",
+              "value": "127.0.0.1:8000"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 11 Jan 2026 14:59:49 GMT"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 11 Jan 2026 14:59:49 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "PHP/8.2.4"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, private"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-RateLimit-Limit",
+              "value": "60"
+            },
+            {
+              "key": "X-RateLimit-Remaining",
+              "value": "59"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"code\": 200,\n    \"message\": \"Riwayat Aktivitas User\",\n    \"data\": [\n        {\n            \"id\": 8,\n            \"user_id\": 2,\n            \"action\": \"UPDATE_APPLICATION\",\n            \"description\": \"Mengubah status lamaran ID 1 menjadi: accepted\",\n            \"created_at\": \"2026-01-11T14:56:28.000000Z\",\n            \"updated_at\": \"2026-01-11T14:56:28.000000Z\"\n        },\n        {\n            \"id\": 7,\n            \"user_id\": 2,\n            \"action\": \"LOGIN\",\n            \"description\": \"User (Role: client) berhasil login.\",\n            \"created_at\": \"2026-01-11T14:48:35.000000Z\",\n            \"updated_at\": \"2026-01-11T14:48:35.000000Z\"\n        },\n        {\n            \"id\": 4,\n            \"user_id\": 2,\n            \"action\": \"CREATE_PROJECT\",\n            \"description\": \"Membuat project baru: jasa bikin web\",\n            \"created_at\": \"2026-01-11T14:20:22.000000Z\",\n            \"updated_at\": \"2026-01-11T14:20:22.000000Z\"\n        },\n        {\n            \"id\": 2,\n            \"user_id\": 2,\n            \"action\": \"LOGIN\",\n            \"description\": \"User (Role: client) berhasil login.\",\n            \"created_at\": \"2026-01-11T14:10:40.000000Z\",\n            \"updated_at\": \"2026-01-11T14:10:40.000000Z\"\n        }\n    ]\n}"
+        },
+        {
+          "id": "dcc56472-10fe-41d6-9e1a-897952ddf3ce",
+          "name": "ADMIN HAPUS REVIEW",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/activity-logs",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "activity-logs"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "Text",
+          "header": [
+            {
+              "key": "Host",
+              "value": "127.0.0.1:8000"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 11 Jan 2026 15:17:07 GMT"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 11 Jan 2026 15:17:07 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "PHP/8.2.4"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, private"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-RateLimit-Limit",
+              "value": "60"
+            },
+            {
+              "key": "X-RateLimit-Remaining",
+              "value": "59"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"code\": 200,\n    \"message\": \"Riwayat Aktivitas User\",\n    \"data\": [\n        {\n            \"id\": 11,\n            \"user_id\": 1,\n            \"action\": \"DELETE_REVIEW\",\n            \"description\": \"Admin menghapus review ID: 1\",\n            \"created_at\": \"2026-01-11T15:16:07.000000Z\",\n            \"updated_at\": \"2026-01-11T15:16:07.000000Z\"\n        },\n        {\n            \"id\": 10,\n            \"user_id\": 1,\n            \"action\": \"LOGIN\",\n            \"description\": \"User (Role: admin) berhasil login.\",\n            \"created_at\": \"2026-01-11T15:15:27.000000Z\",\n            \"updated_at\": \"2026-01-11T15:15:27.000000Z\"\n        },\n        {\n            \"id\": 3,\n            \"user_id\": 1,\n            \"action\": \"CREATE_CATEGORY\",\n            \"description\": \"Admin membuat kategori baru: Web Development\",\n            \"created_at\": \"2026-01-11T14:18:31.000000Z\",\n            \"updated_at\": \"2026-01-11T14:18:31.000000Z\"\n        },\n        {\n            \"id\": 1,\n            \"user_id\": 1,\n            \"action\": \"CREATE_CATEGORY\",\n            \"description\": \"Admin membuat kategori baru: Website Development\",\n            \"created_at\": \"2026-01-11T14:03:17.000000Z\",\n            \"updated_at\": \"2026-01-11T14:03:17.000000Z\"\n        }\n    ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "CEK LIST LAMARAN",
+      "id": "9516c976-a4ac-43b7-b83c-4bbe6dff0b60",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjgxNDI5MTUsImV4cCI6MTc2ODE0NjUxNSwibmJmIjoxNzY4MTQyOTE1LCJqdGkiOiJiUjB3bHY4YjhGVjZhVHh0Iiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.48iXNeXzTMzwkTbFNwCW248ddzgW889thk198PN9fnw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/project-applicants/1",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "project-applicants",
+            "1"
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "3bf8a039-55bc-4b30-acab-68b5e8748f1e",
+          "name": "BERHASIL",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/project-applicants/1",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "project-applicants",
+                "1"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "Text",
+          "header": [
+            {
+              "key": "Host",
+              "value": "127.0.0.1:8000"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 11 Jan 2026 14:51:41 GMT"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 11 Jan 2026 14:51:41 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "PHP/8.2.4"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, private"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-RateLimit-Limit",
+              "value": "60"
+            },
+            {
+              "key": "X-RateLimit-Remaining",
+              "value": "59"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"code\": 200,\n    \"message\": \"List Pelamar Project\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"project_id\": 1,\n            \"user_id\": 3,\n            \"message\": \"Saya jago Laravel, bisa kerjain 3 hari selesai bang!\",\n            \"bid_amount\": \"4500000.00\",\n            \"status\": \"pending\",\n            \"created_at\": \"2026-01-11T14:26:13.000000Z\",\n            \"updated_at\": \"2026-01-11T14:26:13.000000Z\",\n            \"user\": {\n                \"id\": 3,\n                \"name\": \"davin\",\n                \"email\": \"davin@gmail.com\"\n            }\n        }\n    ]\n}"
+        }
+      ]
+    }
+  ]
+}
